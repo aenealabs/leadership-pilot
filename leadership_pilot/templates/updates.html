@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Weekly update</h1>
+  <span class="muted">AI drafts from computed status; every sentence cites data; a person approves before anything is sent.</span>
+  <form method="post" action="/updates/draft" style="margin-left:auto" onsubmit="this.querySelector('button').disabled=true">
+    <button class="button contained" type="submit"><span class="material-symbols-outlined">auto_awesome</span>Draft this week's update</button>
+  </form>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+
+<div class="card">
+  <div class="card-header"><h3>Updates</h3>{% if a %}<span class="muted" style="margin-left:auto;font-size:12px">Status data as of {{ d_label(a.as_of) }}: {{ a.warnings | length }} early warnings</span>{% endif %}</div>
+  {% if updates %}
+  <ul class="list">
+    {% for u in updates %}
+    <li class="list-item">
+      <span class="avatar"><span class="material-symbols-outlined">{{ 'task_alt' if u.status == 'approved' else 'edit_note' }}</span></span>
+      <div class="text">
+        <a class="primary" href="/updates/{{ u.id }}">{{ u.body.subject }}</a>
+        <div class="secondary"><span class="mono">{{ u.key }}</span> · data as of {{ d_label(u.as_of) }} · version {{ u.version }} · {{ u.drafted_by }}
+          {% if u.status == 'approved' %} · approved by {{ u.approved_by }}{% endif %}</div>
+      </div>
+      <span class="chip {{ 'trace-traced' if u.status == 'approved' else 'outlined' }}">{{ u.status }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty"><span class="material-symbols-outlined">edit_note</span><h3>No updates yet</h3><p>Draft one from the current status. Offline, the demo replays a recorded draft for the seeded data.</p></div>
+  {% endif %}
+</div>
+
+<div class="card" id="distribution">
+  <div class="card-header"><h3>Distribution list</h3><span class="muted" style="margin-left:auto;font-size:12px">Email goes to each person in the version chosen for them.</span></div>
+  <table class="distribution">
+    <thead><tr><th>Stakeholder</th><th>Email</th><th>Version</th><th></th></tr></thead>
+    <tbody>
+    {% for p in people %}
+      <tr>
+        <td><div class="primary">{{ p.name }}</div><div class="muted" style="font-size:12px">{{ p.role }} · {{ p.business_unit }} · influence {{ p.influence }}</div></td>
+        <td colspan="3">
+          <form method="post" action="/stakeholders/{{ p.id }}/distribution" class="inline-form">
+            <input name="email" type="email" value="{{ p.email }}" aria-label="Email for {{ p.name }}" placeholder="name@company.com">
+            <select name="audience" aria-label="Version for {{ p.name }}">
+              <option value="" {{ 'selected' if not p.update_audience }}>Not on the list</option>
+              {% for k, label in audiences.items() %}<option value="{{ k }}" {{ 'selected' if p.update_audience == k }}>{{ label }}</option>{% endfor %}
+            </select>
+            <button class="button text" type="submit">Save</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

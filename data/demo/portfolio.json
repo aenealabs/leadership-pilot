@@ -1,0 +1,88 @@
+{
+  "_note": "Fictional Backlog Pilot portfolio snapshot (same shape as Backlog Pilot's /api/portfolio) for the offline demo. Not real data.",
+  "as_of": "2026-10-16",
+  "quarters": ["2026-Q4", "2027-Q1", "2027-Q2", "2027-Q3"],
+  "source": "Backlog Pilot (demo snapshot)",
+  "products": [
+    {
+      "key": "plm", "name": "PLM / 3DEXPERIENCE",
+      "capacity": {"2026-Q4": 21, "2027-Q1": 21, "2027-Q2": 21, "2027-Q3": 21},
+      "load": {"2026-Q4": 26, "2027-Q1": 13, "2027-Q2": 8, "2027-Q3": 0},
+      "features": [
+        {"key": "BP-109", "title": "Single sign-on and MFA for all PLM roles", "epic": "PLM platform security hardening", "status": "Blocked", "size": 8, "wsjf": 5.1, "quarter": "2026-Q4", "reason": "Pinned: open cybersecurity finding"},
+        {"key": "BP-121", "title": "ECO status dashboard for managers", "epic": "Engineering change visibility", "status": "In Progress", "size": 8, "wsjf": 4.6, "quarter": "2026-Q4", "reason": "In progress"},
+        {"key": "BP-110", "title": "Export-controlled data access review", "epic": "PLM platform security hardening", "status": "New", "size": 5, "wsjf": 4.4, "quarter": "2026-Q4", "reason": "Pinned: audit commitment for Q4"},
+        {"key": "BP-122", "title": "ECO form simplification", "epic": "Engineering change visibility", "status": "New", "size": 5, "wsjf": 4.0, "quarter": "2026-Q4", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-123", "title": "Mandatory affected-parts check on ECO submit", "epic": "Engineering change visibility", "status": "New", "size": 5, "wsjf": 3.4, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-124", "title": "Workflow escalation rules", "epic": "Engineering change visibility", "status": "New", "size": 8, "wsjf": 2.9, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-125", "title": "Lifecycle state cleanup", "epic": "PLM platform security hardening", "status": "New", "size": 8, "wsjf": 1.8, "quarter": "2027-Q2", "reason": "Next by WSJF with room in this quarter"}
+      ],
+      "unscored": [],
+      "done": [{"key": "BP-120", "title": "PLM role catalog"}],
+      "changes": [
+        {"feature_key": "BP-110", "feature_title": "Export-controlled data access review", "from": "2027-Q1", "to": "2026-Q4", "cause": "Pinned to 2026-Q4: audit commitment for Q4", "changed_by": "Hannah Liu", "changed_at": "2026-10-07T15:12:00+00:00"}
+      ]
+    },
+    {
+      "key": "cad", "name": "CAD Data Management",
+      "capacity": {"2026-Q4": 13, "2027-Q1": 13, "2027-Q2": 13, "2027-Q3": 13},
+      "load": {"2026-Q4": 11, "2027-Q1": 13, "2027-Q2": 5, "2027-Q3": 0},
+      "features": [
+        {"key": "BP-131", "title": "Legacy vault inventory and migration waves", "epic": "Retire the legacy CAD vault", "status": "In Progress", "size": 8, "wsjf": 6.2, "quarter": "2026-Q4", "reason": "In progress"},
+        {"key": "BP-132", "title": "Vault read-only mode for migrated projects", "epic": "Retire the legacy CAD vault", "status": "New", "size": 3, "wsjf": 5.0, "quarter": "2026-Q4", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-133", "title": "Wave 1 migration: eMobility projects", "epic": "Retire the legacy CAD vault", "status": "New", "size": 13, "wsjf": 3.8, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-134", "title": "Drawing viewer for plants", "epic": "Drawing access", "status": "New", "size": 5, "wsjf": 2.2, "quarter": "2027-Q2", "reason": "Next by WSJF with room in this quarter"}
+      ],
+      "unscored": [],
+      "done": [{"key": "BP-130", "title": "Vault backup hardening"}],
+      "changes": []
+    },
+    {
+      "key": "plm-sap", "name": "PLM-SAP Integration",
+      "capacity": {"2026-Q4": 13, "2027-Q1": 13, "2027-Q2": 13, "2027-Q3": 13},
+      "load": {"2026-Q4": 13, "2027-Q1": 11, "2027-Q2": 5, "2027-Q3": 0},
+      "features": [
+        {"key": "BP-103", "title": "SAP material and BOM upsert service", "epic": "Migrate engineering BOM integration to event-driven APIs", "status": "In Progress", "size": 13, "wsjf": 2.4, "quarter": "2026-Q4", "reason": "In progress"},
+        {"key": "BP-104", "title": "Integration error dashboard", "epic": "Migrate engineering BOM integration to event-driven APIs", "status": "New", "size": 3, "wsjf": 5.3, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-105", "title": "BOM effectivity date sync", "epic": "Migrate engineering BOM integration to event-driven APIs", "status": "New", "size": 8, "wsjf": 3.1, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-106", "title": "Plant notification of released changes", "epic": "Migrate engineering BOM integration to event-driven APIs", "status": "New", "size": 5, "wsjf": 2.6, "quarter": "2027-Q2", "reason": "Next by WSJF with room in this quarter"}
+      ],
+      "unscored": [],
+      "done": [{"key": "BP-102", "title": "BOM release event publisher in PLM"}],
+      "changes": [
+        {"feature_key": "BP-104", "feature_title": "Integration error dashboard", "from": "2026-Q4", "to": "2027-Q1", "cause": "WSJF re-scored on BP-103: job size 8 to 13 after SAP field mapping review", "changed_by": "Elena Kovacs", "changed_at": "2026-10-06T14:02:00+00:00"},
+        {"feature_key": "BP-105", "feature_title": "BOM effectivity date sync", "from": "2026-Q4", "to": "2027-Q1", "cause": "WSJF re-scored on BP-103: job size 8 to 13 after SAP field mapping review", "changed_by": "Elena Kovacs", "changed_at": "2026-10-06T14:02:00+00:00"},
+        {"feature_key": "BP-106", "feature_title": "Plant notification of released changes", "from": "2026-Q4", "to": "2027-Q2", "cause": "Capacity for 2026-Q4 set to 13 (was 16): two engineers moved to the S/4 cutover", "changed_by": "Hannah Liu", "changed_at": "2026-10-13T16:40:00+00:00"}
+      ]
+    },
+    {
+      "key": "data-gov", "name": "Engineering Data Governance",
+      "capacity": {"2026-Q4": 13, "2027-Q1": 13, "2027-Q2": 13, "2027-Q3": 13},
+      "load": {"2026-Q4": 10, "2027-Q1": 8, "2027-Q2": 0, "2027-Q3": 0},
+      "features": [
+        {"key": "BP-107", "title": "Data quality scorecard", "epic": "Engineering data governance foundation", "status": "In Progress", "size": 5, "wsjf": 3.2, "quarter": "2026-Q4", "reason": "In progress"},
+        {"key": "BP-141", "title": "Duplicate part detection at creation", "epic": "Engineering data governance foundation", "status": "New", "size": 5, "wsjf": 4.1, "quarter": "2026-Q4", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-142", "title": "Export classification backfill for legacy parts", "epic": "Export control enforcement", "status": "New", "size": 8, "wsjf": 3.6, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"}
+      ],
+      "unscored": [],
+      "done": [{"key": "BP-108", "title": "Part classification standard"}],
+      "changes": [
+        {"feature_key": "BP-141", "feature_title": "Duplicate part detection at creation", "from": "new", "to": "2026-Q4", "cause": "Approved intake INT-14: duplicate parts across business units", "changed_by": "Jordan Lee", "changed_at": "2026-10-02T13:20:00+00:00"},
+        {"feature_key": "BP-142", "feature_title": "Export classification backfill for legacy parts", "from": "new", "to": "2027-Q1", "cause": "Approved intake INT-15: export control not enforced by the systems", "changed_by": "Jordan Lee", "changed_at": "2026-10-09T10:05:00+00:00"}
+      ]
+    },
+    {
+      "key": "supplier", "name": "Supplier Collaboration",
+      "capacity": {"2026-Q4": 13, "2027-Q1": 13, "2027-Q2": 13, "2027-Q3": 13},
+      "load": {"2026-Q4": 13, "2027-Q1": 8, "2027-Q2": 0, "2027-Q3": 0},
+      "features": [
+        {"key": "BP-151", "title": "Supplier change notice with acknowledgement", "epic": "Supplier change distribution", "status": "In Progress", "size": 8, "wsjf": 5.8, "quarter": "2026-Q4", "reason": "In progress"},
+        {"key": "BP-152", "title": "PPAP resubmission tracking", "epic": "Supplier change distribution", "status": "New", "size": 5, "wsjf": 4.9, "quarter": "2026-Q4", "reason": "Next by WSJF with room in this quarter"},
+        {"key": "BP-153", "title": "Supplier portal export-control check", "epic": "Supplier change distribution", "status": "New", "size": 8, "wsjf": 4.2, "quarter": "2027-Q1", "reason": "Next by WSJF with room in this quarter"}
+      ],
+      "unscored": [],
+      "done": [],
+      "changes": []
+    }
+  ]
+}

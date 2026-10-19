@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>{{ sh.name }}</h1>
+  <span class="muted">{{ sh.role }} · {{ sh.business_unit }} · {{ sh.key }}</span>
+  <a class="button contained" style="margin-left:auto" href="/interviews/new?stakeholder={{ sh.id }}"><span class="material-symbols-outlined">add</span>New interview</a>
+</div>
+<div class="card"><div class="card-body">
+  <span class="chip outlined">Influence: {{ sh.influence }}</span> <span class="chip outlined">Interest: {{ sh.interest }}</span>
+  {% for p in sh.product_list %}<span class="chip" style="margin-left:4px">{{ p }}</span>{% endfor %}
+</div></div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Accepted pain points</h3></div>
+    <ul class="list">
+      {% for c in concerns if c.kind == 'pain_point' %}
+      <li class="list-item"><span class="chip sev-{{ c.severity }}">{{ c.severity }}</span>
+        <div class="text"><div class="primary">{{ c.title }}</div><div class="secondary">{{ c.description }}</div></div></li>
+      {% else %}<li class="list-item muted">None accepted yet.</li>{% endfor %}
+    </ul>
+    <div class="card-header"><h3>Desired outcomes</h3></div>
+    <ul class="list">
+      {% for c in concerns if c.kind == 'outcome' %}
+      <li class="list-item"><div class="text"><div>{{ c.title }}</div>{% if c.description %}<div class="secondary">Measure: {{ c.description }}</div>{% endif %}</div></li>
+      {% else %}<li class="list-item muted">None accepted yet.</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Interviews</h3></div>
+    <ul class="list">
+      {% for iv in interviews %}
+      <li class="list-item clickable" onclick="location.href='/interviews/{{ iv.id }}'">
+        <span class="material-symbols-outlined muted">forum</span>
+        <div class="text"><div class="primary">{{ iv.held_on }} <span class="mono muted">{{ iv.key }}</span></div>
+          <div class="secondary">{{ iv.notes[:110] }}…</div></div>
+        <span class="chip {{ 'trace-traced' if iv.status == 'accepted' else 'outlined' }}">{{ iv.status }}</span></li>
+      {% else %}<li class="list-item muted">No interviews yet.</li>{% endfor %}
+    </ul>
+    <div class="card-header"><h3>Follow-up questions</h3></div>
+    <ul class="list">
+      {% for c in concerns if c.kind == 'follow_up' %}<li class="list-item">{{ c.title }}</li>
+      {% else %}<li class="list-item muted">None yet.</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,518 @@
+{
+  "input": "IV-1.1 | Priya Raman, Director of Engineering, Electrical Products | severity high | ECO cycle time is long and status is invisible: ECOs take three weeks and their status cannot be determined; the PLM workflow view is unusable for managers, forcing Priya to track escalations in a personal spreadsheet.\nIV-1.2 | Priya Raman, Director of Engineering, Electrical Products | severity high | Incomplete ECOs bounce back: About a third of ECOs are returned for missing information, usually the affected-parts list or cost impact, adding rework and delay to the change process.\nIV-1.3 | Priya Raman, Director of Engineering, Electrical Products | severity medium | IT request status is opaque: Engineering requests submitted to IT disappear, with no visibility into whether they are in the backlog, being built, or dropped.\nIV-1.4 | Priya Raman, Director of Engineering, Electrical Products | severity medium | Duplicate parts from poor search: New hires create new part numbers instead of searching because search is slower than redrawing, producing an estimated few hundred duplicate fasteners in the last year.\nIV-1.5 | Priya Raman, Director of Engineering, Electrical Products | severity critical | BOM changes reach SAP late: BOM changes arrive in SAP a day or two late, which has led to production lines building the old revision.\nIV-2.1 | Marcus Bell, Chief Engineer, Aerospace Systems | severity critical | Manual export license checks before supplier sharing: Sharing ITAR/EAR-controlled drawings with suppliers depends on a manual license check against a spreadsheet. Twice this year a drawing went to a supplier before the check finished. Both were caught, but each was a near-miss on a reportable compliance event.\nIV-2.2 | Marcus Bell, Chief Engineer, Aerospace Systems | severity high | Suppliers not notified of drawing changes: Suppliers do not get timely notice of drawing changes and only find out when parts fail to fit. This causes fit problems and rework.\nIV-2.3 | Marcus Bell, Chief Engineer, Aerospace Systems | severity medium | Tool sprawl for engineers: Marcus is concerned that any new tooling adds another place for engineers to look. They want new capability built into the systems engineers already use.\nIV-2.4 | Marcus Bell, Chief Engineer, Aerospace Systems | severity medium | Volume-based prioritization buries aerospace: Aerospace changes are lower volume but higher consequence. A prioritization model based purely on volume would always push aerospace needs down.\nIV-3.1 | Elena Kovacs, Manufacturing Engineering Manager, Plant Operations | severity critical | Silent BOM interface failures: When the overnight BOM interface to SAP fails, nobody on the plant team is notified; they discover it only when a work order pulls the old revision. Last quarter this caused a rework event on a switchgear line.\nIV-3.2 | Elena Kovacs, Manufacturing Engineering Manager, Plant Operations | severity medium | Slow BOM availability in SAP: Released BOMs reach SAP the next day at best, or two days if the overnight interface fails, which delays the plant's ability to act on engineering releases.\nIV-3.3 | Elena Kovacs, Manufacturing Engineering Manager, Plant Operations | severity medium | Effectivity dates don't match plant schedules: Engineering releases changes with effectivity dates that don't align with plant schedules, forcing weekly manual reconciliation by email.\nIV-3.4 | Elena Kovacs, Manufacturing Engineering Manager, Plant Operations | severity medium | ECO notification overload slows approvals: As an approver on manufacturing-impacting changes, Elena receives about forty notification emails a day and approves in Friday batches, which adds days to ECO cycle time.\nIV-4.1 | Daniel Okafor, Director of Supplier Quality, Global Supply Chain | severity critical | Suppliers building to superseded revisions: Two field escapes this year were traced to suppliers building to superseded drawing revisions, each costing more than the entire supplier portal project would.\nIV-4.2 | Daniel Okafor, Director of Supplier Quality, Global Supply Chain | severity high | Manual, unconfirmed change distribution to suppliers: Changed drawings are sent to suppliers by a buyer emailing a PDF, with no confirmation that the supplier received or read it, or updated their PPAP.\nIV-4.3 | Daniel Okafor, Director of Supplier Quality, Global Supply Chain | severity high | Purchasing unaware of changes affecting open POs: Purchasing has no view of which open purchase orders a change affects and learns of changes from suppliers, preventing them from holding or expediting orders.\nIV-4.4 | Daniel Okafor, Director of Supplier Quality, Global Supply Chain | severity medium | Supplier-facing work loses in prioritization: Supplier change capabilities keep being deprioritized behind engineering-internal projects because supplier-side stakeholders are not represented in the prioritization meeting.\nIV-4.5 | Daniel Okafor, Director of Supplier Quality, Global Supply Chain | severity high | Unclear ownership of supplier export license data: Suppliers must only receive data they are licensed for, but Daniel is not sure who maintains supplier license data today, creating export control risk.\nIV-5.1 | Hannah Liu, PLM Platform Lead, Engineering IT | severity critical | Legacy CAD vault is an unsupported, insecure single point of failure: The legacy CAD vault from an acquired business unit runs unsupported software, failed a cybersecurity review, and its vendor contract ends next year. About 400 engineers still use it daily, and an outage would stop a business unit.\nIV-5.2 | Hannah Liu, PLM Platform Lead, Engineering IT | severity high | Team consumed by break-fix and access requests: Hannah's team spends most of its time on reactive break-fix and access requests, which leaves little capacity for improvement work.\nIV-5.3 | Hannah Liu, PLM Platform Lead, Engineering IT | severity high | PLM-to-SAP interface fails silently: The PLM-to-SAP integration is a nightly batch with no alerting, so plants are the ones who discover failures. Hannah has asked twice for budget to move it to event-driven integration.\nIV-5.4 | Hannah Liu, PLM Platform Lead, Engineering IT | severity medium | No structured intake or prioritization for requests: Requests arrive through informal channels with no way to decline or defer them, and business leaders cannot see the trade-offs.\nIV-5.5 | Hannah Liu, PLM Platform Lead, Engineering IT | severity medium | Mandatory ECO fields drive workarounds: Hannah pushed back on adding more mandatory ECO fields because engineers work around added fields. Hannah prefers smarter defaults.\nIV-5.6 | Hannah Liu, PLM Platform Lead, Engineering IT | severity medium | Fragmented part masters with no data quality measurement: The acquisitions left three part masters with no common classification and no data quality scorecard.\nIV-5.7 | Hannah Liu, PLM Platform Lead, Engineering IT | severity high | Product management skill gap and burnout risk on the team: The team is strong on platform skills but thin on product management, and two people are at risk of burnout.\nIV-6.1 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity critical | Export classification is optional in PLM: Drawings in PLM can exist and be released without export classification, so nothing prevents controlled data from being shared. This was the root cause of two premature-share incidents that narrowly avoided becoming violations.\nIV-6.2 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity high | Large unclassified legacy backlog from acquisitions: Tomas estimates thousands of legacy items from acquisitions have no export classification at all, leaving potentially controlled data unprotected.\nIV-6.3 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity high | Access to controlled data based on stale folder permissions: Access to controlled data is governed by folder permissions set up years ago rather than by classification and each person's authorization, creating compliance risk.\nIV-6.4 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity medium | Manual quarterly access attestations: Quarterly access attestations are done by hand in spreadsheets and take two weeks, consuming effort and slowing compliance verification.\nIV-6.5 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity high | Export licenses and supplier license data out of sync: Trade Compliance owns export licenses while supplier license data lives with Procurement; the two are never in sync and nobody owns keeping them aligned.\nIV-6.6 | Tomas Rivera, Export Compliance Manager, Trade Compliance | severity medium | Concern about AI tools and controlled data: Tomas is wary of AI tools handling controlled technical data and requires visibility into where data goes and who can see it.\nIV-7.1 | Grace Whitfield, VP Product Engineering, eMobility | severity high | Designing on three systems after acquisitions: Two acquisitions left eMobility designing on three systems, so engineers lose hours each week finding the right version of a part.\nIV-7.2 | Grace Whitfield, VP Product Engineering, eMobility | severity high | Duplicate parts drive cost: A sample review found 14 percent of new connectors were near-duplicates. This doubles inventory, supplier count, and qualification cost.\nIV-7.3 | Grace Whitfield, VP Product Engineering, eMobility | severity medium | IT delivery is unpredictable: Grace lacks a clear view of what IT will and won't deliver this year. They want a roadmap tied to business outcomes rather than a list of tickets.\nIV-7.4 | Grace Whitfield, VP Product Engineering, eMobility | severity medium | Legacy CAD vault migration risk: eMobility depends on the legacy CAD vault for older designs. Grace supports retiring it, but a migration that halts their teams for weeks is a risk.\nIV-7.5 | Grace Whitfield, VP Product Engineering, eMobility | severity medium | No cross-BU view of data quality: There is no reliable view of data quality across business units.\nIV-8.1 | Kenji Watanabe, Senior Design Engineer, Electrical Products | severity high | ECO form has too many irrelevant fields: The ECO submission screen has 23 fields, many of which don't apply to a given change. Kenji guesses values to get through submission, and changes still get rejected for other reasons, which causes rework and delay and risks inaccurate change data.\nIV-8.2 | Kenji Watanabe, Senior Design Engineer, Electrical Products | severity high | Part search only works by part number, causing duplicate parts: Search finds parts only by number, not by attributes. When search fails, Kenji creates new parts that are probably duplicates, which degrades part master data quality.\nIV-8.3 | Kenji Watanabe, Senior Design Engineer, Electrical Products | severity medium | ECO status is invisible: The workflow does not expose where a change is. Kenji has to message approvers directly to find out, which costs time for engineers and approvers.\nIV-8.4 | Kenji Watanabe, Senior Design Engineer, Electrical Products | severity medium | Inadequate 3DEXPERIENCE training: Kenji learned 3DEXPERIENCE from colleagues rather than formal training. As a result, new hires repeat the same mistakes.",
+  "synthesis": {
+    "themes": [
+      {
+        "title": "Engineering change process is slow, opaque, and burdensome",
+        "description": "ECOs take about three weeks, have no visible status, and about a third bounce back for missing information, while a 23-field form and email overload push engineers and approvers into workarounds. This drags down engineering productivity and the accuracy of change data that every downstream system depends on.",
+        "concern_ids": [
+          "IV-1.1",
+          "IV-1.2",
+          "IV-3.4",
+          "IV-5.5",
+          "IV-8.1",
+          "IV-8.3",
+          "IV-8.4"
+        ],
+        "strategic_fit": 4,
+        "fit_rationale": "Fixing the core change workflow directly improves engineering productivity and modernizes the most-used PLM process."
+      },
+      {
+        "title": "BOM handoff to SAP is late and fails silently",
+        "description": "Released BOMs reach SAP a day or two late through a nightly batch with no alerting, and effectivity dates don't match plant schedules, so plants discover failures only when work orders pull old revisions. This has already caused production of superseded revisions and a rework event on a switchgear line.",
+        "concern_ids": [
+          "IV-1.5",
+          "IV-3.1",
+          "IV-3.2",
+          "IV-3.3",
+          "IV-5.3"
+        ],
+        "strategic_fit": 4,
+        "fit_rationale": "Moving to monitored, event-driven integration is a clear modernization step that removes a critical quality risk."
+      },
+      {
+        "title": "Drawing changes reach suppliers late, unconfirmed, and untracked",
+        "description": "Changed drawings go to suppliers as emailed PDFs with no confirmation of receipt or PPAP update, and Purchasing cannot see which open POs a change affects. Suppliers building to superseded revisions caused two costly field escapes this year.",
+        "concern_ids": [
+          "IV-2.2",
+          "IV-4.1",
+          "IV-4.2",
+          "IV-4.3"
+        ],
+        "strategic_fit": 4,
+        "fit_rationale": "Extending the digital thread to suppliers is modernization with a direct quality and cost payoff, though it sits at the edge of the engineering systems portfolio."
+      },
+      {
+        "title": "Export control is not enforced by the systems",
+        "description": "Export classification is optional in PLM, thousands of legacy items are unclassified, access relies on stale folder permissions, and supplier license data has no owner, so controlled-data sharing depends on manual spreadsheet checks. Two premature shares this year were near-misses on reportable violations.",
+        "concern_ids": [
+          "IV-2.1",
+          "IV-4.5",
+          "IV-6.1",
+          "IV-6.2",
+          "IV-6.3",
+          "IV-6.4",
+          "IV-6.5",
+          "IV-6.6"
+        ],
+        "strategic_fit": 5,
+        "fit_rationale": "This is the most direct compliance exposure in the portfolio, with critical near-misses already on record."
+      },
+      {
+        "title": "Fragmented part data drives duplicates and lost engineering time",
+        "description": "Three part masters with no common classification, number-only search, and no data quality measurement lead engineers to create duplicate parts and lose hours finding the right version. Near-duplicate parts inflate inventory, supplier count, and qualification cost.",
+        "concern_ids": [
+          "IV-1.4",
+          "IV-5.6",
+          "IV-7.1",
+          "IV-7.2",
+          "IV-7.5",
+          "IV-8.2"
+        ],
+        "strategic_fit": 4,
+        "fit_rationale": "Consolidating and cleaning part data is foundational modernization that pays back in engineering productivity and cost."
+      },
+      {
+        "title": "Legacy CAD vault is an unsupported single point of failure",
+        "description": "The acquired business unit's CAD vault runs unsupported software, failed a cybersecurity review, and loses vendor support next year while about 400 engineers use it daily. Retirement is urgent, but a disruptive migration could halt eMobility teams for weeks.",
+        "concern_ids": [
+          "IV-5.1",
+          "IV-7.4"
+        ],
+        "strategic_fit": 5,
+        "fit_rationale": "Retiring the vault simultaneously addresses modernization, security compliance, and a hard contract deadline."
+      },
+      {
+        "title": "IT intake, prioritization, and roadmap are opaque",
+        "description": "Requests arrive informally and disappear, business leaders can't see trade-offs or what IT will deliver, and the prioritization forum favors volume and engineering-internal work over high-consequence aerospace and supplier needs. Without a transparent, outcome-based process, trust erodes and the highest-risk work keeps losing.",
+        "concern_ids": [
+          "IV-1.3",
+          "IV-2.3",
+          "IV-2.4",
+          "IV-4.4",
+          "IV-5.4",
+          "IV-7.3"
+        ],
+        "strategic_fit": 3,
+        "fit_rationale": "Governance is an enabler rather than a direct outcome, but every other theme depends on it being fixed."
+      },
+      {
+        "title": "Platform team is stretched thin and reactive",
+        "description": "The PLM platform team spends most of its time on break-fix and access requests, lacks product management skills, and has two people at risk of burnout. Without freeing capacity, none of the improvement work can be delivered.",
+        "concern_ids": [
+          "IV-5.2",
+          "IV-5.7"
+        ],
+        "strategic_fit": 3,
+        "fit_rationale": "Team capacity is a prerequisite for modernization and productivity gains rather than a goal in itself."
+      }
+    ],
+    "contradictions": [
+      {
+        "topic": "Mandatory ECO and release data versus form burden",
+        "side_a": "Change and release records need more required data, such as affected parts, cost impact, and export classification, so changes stop bouncing back and controlled data can't be released unclassified.",
+        "side_a_ids": [
+          "IV-1.2",
+          "IV-6.1"
+        ],
+        "side_b": "Adding mandatory fields drives guessing and workarounds; the form already has too many irrelevant fields and should use smarter defaults instead.",
+        "side_b_ids": [
+          "IV-5.5",
+          "IV-8.1"
+        ],
+        "why_it_matters": "The product owner must decide which data is truly mandatory, such as export classification, and make the rest conditional or defaulted so completeness rises without more guessing."
+      },
+      {
+        "topic": "Speed of legacy CAD vault retirement",
+        "side_a": "The vault is unsupported, failed a cybersecurity review, and loses vendor support next year, so migration must happen soon.",
+        "side_a_ids": [
+          "IV-5.1"
+        ],
+        "side_b": "eMobility depends on the vault for older designs and cannot afford a migration that halts teams for weeks.",
+        "side_b_ids": [
+          "IV-7.4"
+        ],
+        "why_it_matters": "The migration approach must meet the contract and security deadline while being phased so no business unit stops working."
+      },
+      {
+        "topic": "New supplier-facing tooling versus tool sprawl",
+        "side_a": "A dedicated supplier portal is justified because supplier revision escapes cost more than the entire portal project.",
+        "side_a_ids": [
+          "IV-4.1"
+        ],
+        "side_b": "Any new tool adds another place for engineers to look, so new capability should live inside existing systems.",
+        "side_b_ids": [
+          "IV-2.3"
+        ],
+        "why_it_matters": "Supplier change distribution must be designed so suppliers get a controlled channel while engineers keep working only in PLM."
+      }
+    ],
+    "personas": [
+      {
+        "name": "design engineer",
+        "description": "Creates parts and drawings and submits engineering changes in 3DEXPERIENCE, often learning the tools from colleagues rather than formal training.",
+        "goals": [
+          "Find and reuse existing parts quickly",
+          "Submit a change once without guessing at fields",
+          "Know where a change is without chasing approvers"
+        ],
+        "pain_points": [
+          "23-field ECO form with irrelevant fields",
+          "Search works only by part number",
+          "No visibility of ECO status",
+          "Learned the system informally"
+        ],
+        "based_on": [
+          "IV-8.1",
+          "IV-8.2",
+          "IV-8.3",
+          "IV-8.4",
+          "IV-1.4",
+          "IV-7.1"
+        ]
+      },
+      {
+        "name": "engineering business unit leader",
+        "description": "Director or VP accountable for engineering throughput, cost, and change risk across a product line or business unit.",
+        "goals": [
+          "Shorten ECO cycle time with visible status",
+          "Cut duplicate-part cost",
+          "See a predictable, outcome-based IT roadmap",
+          "Retire legacy systems without stopping teams"
+        ],
+        "pain_points": [
+          "Tracks escalations in a personal spreadsheet",
+          "IT requests disappear",
+          "Duplicate parts drive cost",
+          "Volume-based prioritization buries high-consequence work"
+        ],
+        "based_on": [
+          "IV-1.1",
+          "IV-1.2",
+          "IV-1.3",
+          "IV-7.2",
+          "IV-7.3",
+          "IV-7.4",
+          "IV-7.5",
+          "IV-2.4",
+          "IV-2.3"
+        ]
+      },
+      {
+        "name": "manufacturing engineering manager",
+        "description": "Runs plant manufacturing engineering, approves manufacturing-impacting changes, and depends on timely, correct BOMs in SAP.",
+        "goals": [
+          "Get released BOMs into SAP the same day",
+          "Be alerted immediately when the interface fails",
+          "Receive effectivity dates aligned to plant schedules",
+          "Approve changes without notification overload"
+        ],
+        "pain_points": [
+          "Silent BOM interface failures",
+          "Next-day or later BOM availability",
+          "Weekly manual effectivity reconciliation",
+          "About forty notification emails a day"
+        ],
+        "based_on": [
+          "IV-3.1",
+          "IV-3.2",
+          "IV-3.3",
+          "IV-3.4",
+          "IV-1.5",
+          "IV-5.3"
+        ]
+      },
+      {
+        "name": "supplier quality director",
+        "description": "Owns supplier quality and the flow of drawing changes to suppliers and Purchasing across the global supply chain.",
+        "goals": [
+          "Ensure suppliers build to the current revision",
+          "Get confirmed receipt and PPAP updates for changes",
+          "Give Purchasing visibility of affected POs",
+          "Have supplier needs represented in prioritization"
+        ],
+        "pain_points": [
+          "Field escapes from superseded revisions",
+          "Changes sent as emailed PDFs without confirmation",
+          "Purchasing learns of changes from suppliers",
+          "Supplier work keeps being deprioritized"
+        ],
+        "based_on": [
+          "IV-4.1",
+          "IV-4.2",
+          "IV-4.3",
+          "IV-4.4",
+          "IV-4.5",
+          "IV-2.2"
+        ]
+      },
+      {
+        "name": "export compliance manager",
+        "description": "Responsible for ITAR/EAR controls on technical data, export licenses, and access attestations.",
+        "goals": [
+          "Make classification mandatory before release or sharing",
+          "Classify the legacy backlog",
+          "Base access on classification and authorization",
+          "Keep license and supplier license data in sync"
+        ],
+        "pain_points": [
+          "Classification is optional in PLM",
+          "Thousands of unclassified legacy items",
+          "Stale folder permissions",
+          "Two-week manual attestations",
+          "Uncertainty about AI tools and controlled data"
+        ],
+        "based_on": [
+          "IV-6.1",
+          "IV-6.2",
+          "IV-6.3",
+          "IV-6.4",
+          "IV-6.5",
+          "IV-6.6",
+          "IV-2.1"
+        ]
+      }
+    ],
+    "journeys": [
+      {
+        "persona": "design engineer",
+        "title": "Getting an engineering change released to plants and suppliers",
+        "steps": [
+          {
+            "step": "Find or create parts",
+            "what_happens": "The engineer searches by part number, fails to find a match across three systems, and creates a new part that is likely a duplicate.",
+            "pain_ids": [
+              "IV-8.2",
+              "IV-1.4",
+              "IV-7.1"
+            ]
+          },
+          {
+            "step": "Fill out the ECO",
+            "what_happens": "The engineer completes a 23-field form, guessing values for fields that don't apply, having learned the tool from colleagues.",
+            "pain_ids": [
+              "IV-8.1",
+              "IV-5.5",
+              "IV-8.4"
+            ]
+          },
+          {
+            "step": "Submit and get reviewed",
+            "what_happens": "About a third of ECOs bounce back for missing affected-parts or cost-impact information, forcing rework.",
+            "pain_ids": [
+              "IV-1.2"
+            ]
+          },
+          {
+            "step": "Wait for approvals",
+            "what_happens": "Approvers batch decisions weekly because of notification overload, and the engineer messages approvers directly to learn status.",
+            "pain_ids": [
+              "IV-3.4",
+              "IV-8.3",
+              "IV-1.1"
+            ]
+          },
+          {
+            "step": "Release to manufacturing",
+            "what_happens": "The BOM moves to SAP in a nightly batch with no alerting; when it fails, plants build the old revision.",
+            "pain_ids": [
+              "IV-1.5",
+              "IV-3.1",
+              "IV-3.2",
+              "IV-5.3"
+            ]
+          },
+          {
+            "step": "Plant implementation",
+            "what_happens": "Effectivity dates don't match plant schedules and are reconciled manually by email every week.",
+            "pain_ids": [
+              "IV-3.3"
+            ]
+          },
+          {
+            "step": "Notify suppliers",
+            "what_happens": "A buyer emails a PDF with no confirmation, and suppliers may keep building to the superseded revision.",
+            "pain_ids": [
+              "IV-2.2",
+              "IV-4.2",
+              "IV-4.1"
+            ]
+          }
+        ]
+      },
+      {
+        "persona": "supplier quality director",
+        "title": "Getting a changed controlled drawing safely to a supplier",
+        "steps": [
+          {
+            "step": "Confirm the drawing's classification",
+            "what_happens": "The drawing may have been released without export classification, especially if it came from an acquired business.",
+            "pain_ids": [
+              "IV-6.1",
+              "IV-6.2"
+            ]
+          },
+          {
+            "step": "Verify the supplier's license",
+            "what_happens": "Someone checks a spreadsheet by hand against supplier license data that nobody clearly owns or keeps in sync.",
+            "pain_ids": [
+              "IV-2.1",
+              "IV-4.5",
+              "IV-6.5"
+            ]
+          },
+          {
+            "step": "Send the change",
+            "what_happens": "A buyer emails the PDF, sometimes before the license check finishes.",
+            "pain_ids": [
+              "IV-4.2",
+              "IV-2.1"
+            ]
+          },
+          {
+            "step": "Confirm supplier adoption",
+            "what_happens": "There is no confirmation of receipt or PPAP update, and fit failures reveal that the supplier missed the change.",
+            "pain_ids": [
+              "IV-4.2",
+              "IV-4.1",
+              "IV-2.2"
+            ]
+          },
+          {
+            "step": "Adjust open purchase orders",
+            "what_happens": "Purchasing cannot see affected POs and learns about changes from suppliers, too late to hold or expedite.",
+            "pain_ids": [
+              "IV-4.3"
+            ]
+          },
+          {
+            "step": "Prove access was appropriate",
+            "what_happens": "Access rests on old folder permissions and is attested quarterly by hand over two weeks.",
+            "pain_ids": [
+              "IV-6.3",
+              "IV-6.4"
+            ]
+          }
+        ]
+      }
+    ],
+    "plan": [
+      {
+        "horizon": "30",
+        "action": "Meet one-on-one with each platform team member, quantify break-fix and access-request load, and shield the two at-risk people by deferring non-critical work.",
+        "theme_titles": [
+          "Platform team is stretched thin and reactive"
+        ]
+      },
+      {
+        "horizon": "30",
+        "action": "Stand up a single visible intake queue and a prioritization forum that includes Supply Chain, Trade Compliance, and Aerospace, using consequence-weighted criteria rather than volume alone.",
+        "theme_titles": [
+          "IT intake, prioritization, and roadmap are opaque"
+        ]
+      },
+      {
+        "horizon": "30",
+        "action": "Add failure alerting to the nightly PLM-to-SAP batch, routed to the platform team and plant contacts, as an immediate quick win.",
+        "theme_titles": [
+          "BOM handoff to SAP is late and fails silently"
+        ]
+      },
+      {
+        "horizon": "30",
+        "action": "Convene Trade Compliance and Procurement to name an owner for supplier license data and agree on an interim rule: no supplier share without a recorded classification and license check.",
+        "theme_titles": [
+          "Export control is not enforced by the systems"
+        ]
+      },
+      {
+        "horizon": "30",
+        "action": "Run a joint ECO data workshop with engineering leaders, design engineers, the platform lead, and Trade Compliance to decide which fields are truly mandatory and which become conditional or defaulted.",
+        "theme_titles": [
+          "Engineering change process is slow, opaque, and burdensome"
+        ]
+      },
+      {
+        "horizon": "30",
+        "action": "Hold a joint session with eMobility leadership and the platform lead to set phased, no-downtime principles for the CAD vault migration against the vendor contract end date.",
+        "theme_titles": [
+          "Legacy CAD vault is an unsupported single point of failure"
+        ]
+      },
+      {
+        "horizon": "60",
+        "action": "Publish a business-outcome roadmap for the year showing what will and won't be delivered and why.",
+        "theme_titles": [
+          "IT intake, prioritization, and roadmap are opaque"
+        ]
+      },
+      {
+        "horizon": "60",
+        "action": "Ship a slimmed ECO form with conditional fields and smart defaults, plus a manager-facing ECO status view and digest notifications for approvers.",
+        "theme_titles": [
+          "Engineering change process is slow, opaque, and burdensome"
+        ]
+      },
+      {
+        "horizon": "60",
+        "action": "Make export classification mandatory at release for new items, and launch a prioritized classification campaign for the legacy backlog.",
+        "theme_titles": [
+          "Export control is not enforced by the systems"
+        ]
+      },
+      {
+        "horizon": "60",
+        "action": "Fund and design event-driven PLM-to-SAP integration, including effectivity alignment with plant schedules.",
+        "theme_titles": [
+          "BOM handoff to SAP is late and fails silently"
+        ]
+      },
+      {
+        "horizon": "60",
+        "action": "Finalize a wave-based vault migration plan with rollback, and baseline a cross-BU part data quality scorecard.",
+        "theme_titles": [
+          "Legacy CAD vault is an unsupported single point of failure",
+          "Fragmented part data drives duplicates and lost engineering time"
+        ]
+      },
+      {
+        "horizon": "90",
+        "action": "Pilot PLM-driven supplier change notification with receipt acknowledgment and PPAP tracking, plus an affected-open-PO view for Purchasing, keeping engineers inside PLM.",
+        "theme_titles": [
+          "Drawing changes reach suppliers late, unconfirmed, and untracked"
+        ]
+      },
+      {
+        "horizon": "90",
+        "action": "Execute the first vault migration wave and cut over the first event-driven BOM flow to one plant.",
+        "theme_titles": [
+          "Legacy CAD vault is an unsupported single point of failure",
+          "BOM handoff to SAP is late and fails silently"
+        ]
+      },
+      {
+        "horizon": "90",
+        "action": "Deliver attribute-based part search and a common classification for new parts to stop duplicate creation.",
+        "theme_titles": [
+          "Fragmented part data drives duplicates and lost engineering time"
+        ]
+      },
+      {
+        "horizon": "90",
+        "action": "Pilot classification-based access control with automated attestation reporting, and document data-flow visibility for any AI tooling.",
+        "theme_titles": [
+          "Export control is not enforced by the systems"
+        ]
+      },
+      {
+        "horizon": "90",
+        "action": "Add product management capacity to the team, automate routine access requests, and launch formal 3DEXPERIENCE onboarding training.",
+        "theme_titles": [
+          "Platform team is stretched thin and reactive",
+          "Engineering change process is slow, opaque, and burdensome"
+        ]
+      }
+    ],
+    "headline": "The digital thread from engineering release to plants, suppliers, and export controls is broken: changes reach SAP late or silently fail, suppliers build to superseded revisions, and controlled drawings can leave before export checks, producing field escapes and compliance near-misses."
+  }
+}

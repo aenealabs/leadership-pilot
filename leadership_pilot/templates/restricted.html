@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card"><div class="empty">
+  <span class="material-symbols-outlined">lock</span>
+  <h3>Restricted</h3>
+  <p>Interview notes are candid, so only the listening-tour owner and approvers can open {{ what }}.
+    This attempt was recorded in the audit log.</p>
+  <p><a href="/stakeholders">Back to stakeholders</a></p>
+</div></div>
+{% endblock %}

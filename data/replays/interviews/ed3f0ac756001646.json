@@ -1,0 +1,89 @@
+{
+  "notes": "Listening tour, week 5. Kenji Watanabe, Senior Design Engineer, Electrical Products. 30 minutes, at the desk.\n\nKenji showed the ECO screen. \"Twenty-three fields, and half of them don't apply to my change.\" Kenji often guesses values to get through submission, then the change gets rejected anyway for something else. Kenji would rather the system fill in what it already knows, like the affected parts from where-used, than add more required fields.\n\nPart search: \"Search finds parts by number, but I don't know the number. I know it's an M6 stainless screw.\" Kenji creates new parts when search fails, and admits it's probably a duplicate. Wants search by attributes and similar-part suggestions before creating a new number.\n\nOn ECO status, Kenji messages approvers directly to find out where changes are. \"The workflow knows, but it won't tell me.\"\n\nTraining: Kenji learned 3DEXPERIENCE from colleagues, not training. New hires repeat the same mistakes.\n\nKenji likes the idea of AI help if it's transparent: \"If it suggests something, show me why. Don't just fill a field.\"\n\nSuccess: submit an ECO in ten minutes without guessing, and find existing parts first time.\n\nFollow-up: shadow two more engineers to see if the field count issue is universal.",
+  "extraction": {
+    "summary": "Kenji Watanabe is a Senior Design Engineer in Electrical Products who works daily in the ECO and part-search workflows. What matters most to them is submitting ECOs quickly without guessing values, finding existing parts by attributes instead of creating duplicates, and seeing ECO status without chasing approvers. They are open to AI assistance only if its suggestions are transparent.",
+    "pain_points": [
+      {
+        "title": "ECO form has too many irrelevant fields",
+        "description": "The ECO submission screen has 23 fields, many of which don't apply to a given change. Kenji guesses values to get through submission, and changes still get rejected for other reasons, which causes rework and delay and risks inaccurate change data.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "\"Twenty-three fields, and half of them don't apply to my change.\"",
+          "Kenji often guesses values to get through submission, then the change gets rejected anyway for something else."
+        ]
+      },
+      {
+        "title": "Part search only works by part number, causing duplicate parts",
+        "description": "Search finds parts only by number, not by attributes. When search fails, Kenji creates new parts that are probably duplicates, which degrades part master data quality.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "\"Search finds parts by number, but I don't know the number. I know it's an M6 stainless screw.\"",
+          "Kenji creates new parts when search fails, and admits it's probably a duplicate."
+        ]
+      },
+      {
+        "title": "ECO status is invisible",
+        "description": "The workflow does not expose where a change is. Kenji has to message approvers directly to find out, which costs time for engineers and approvers.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "On ECO status, Kenji messages approvers directly to find out where changes are.",
+          "\"The workflow knows, but it won't tell me.\""
+        ]
+      },
+      {
+        "title": "Inadequate 3DEXPERIENCE training",
+        "description": "Kenji learned 3DEXPERIENCE from colleagues rather than formal training. As a result, new hires repeat the same mistakes.",
+        "severity": "medium",
+        "systems": [
+          "3DEXPERIENCE"
+        ],
+        "quotes": [
+          "Kenji learned 3DEXPERIENCE from colleagues, not training.",
+          "New hires repeat the same mistakes."
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "The ECO system auto-fills known data, such as affected parts from where-used, instead of adding more required fields, so an ECO can be submitted quickly without guessing.",
+        "measure": "Submit an ECO in ten minutes without guessing.",
+        "quotes": [
+          "Kenji would rather the system fill in what it already knows, like the affected parts from where-used, than add more required fields.",
+          "Success: submit an ECO in ten minutes without guessing, and find existing parts first time."
+        ]
+      },
+      {
+        "description": "Part search supports attribute-based search and suggests similar parts before a new part number is created.",
+        "measure": "Find existing parts first time.",
+        "quotes": [
+          "Wants search by attributes and similar-part suggestions before creating a new number.",
+          "Success: submit an ECO in ten minutes without guessing, and find existing parts first time."
+        ]
+      },
+      {
+        "description": "AI assistance is transparent and explains why it makes each suggestion, rather than silently filling fields.",
+        "measure": "",
+        "quotes": [
+          "Kenji likes the idea of AI help if it's transparent: \"If it suggests something, show me why. Don't just fill a field.\""
+        ]
+      }
+    ],
+    "systems_named": [
+      "3DEXPERIENCE"
+    ],
+    "urgency": "medium",
+    "follow_up_questions": [
+      "Which specific ECO fields don't apply to your typical changes, and which are most often guessed?",
+      "What are the most common reasons your ECOs get rejected?",
+      "Roughly how often do you create a new part because search failed, and how could duplicates be confirmed?",
+      "Which part attributes (e.g., size, material, type) would you most want to search by?",
+      "What ECO status information would be most useful (current approver, step, expected time), and where would you want to see it?",
+      "What would effective 3DEXPERIENCE training for new hires look like, and which mistakes do new hires repeat most?",
+      "Is the ECO and part search tooling you described within 3DEXPERIENCE or a separate system?",
+      "Is the field-count issue shared by other engineers? (Planned: shadow two more engineers.)"
+    ]
+  }
+}

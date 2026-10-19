@@ -1,0 +1,13 @@
+{
+  "_note": "Fictional stakeholders for the listening-tour demo. Not real people or company data. Emails use the reserved example.com domain.",
+  "stakeholders": [
+    {"name": "Priya Raman", "role": "Director of Engineering", "business_unit": "Electrical Products", "products": ["PLM / 3DEXPERIENCE", "PLM-SAP Integration"], "influence": "high", "interest": "high", "interview": "01-priya-raman.md", "email": "priya.raman@example.com", "update_audience": "summary"},
+    {"name": "Marcus Bell", "role": "Chief Engineer", "business_unit": "Aerospace Systems", "products": ["PLM / 3DEXPERIENCE", "Supplier Collaboration"], "influence": "high", "interest": "medium", "interview": "02-marcus-bell.md", "email": "marcus.bell@example.com", "update_audience": "summary"},
+    {"name": "Elena Kovacs", "role": "Manufacturing Engineering Manager", "business_unit": "Plant Operations", "products": ["PLM-SAP Integration"], "influence": "medium", "interest": "high", "interview": "03-elena-kovacs.md", "email": "elena.kovacs@example.com", "update_audience": "detailed"},
+    {"name": "Daniel Okafor", "role": "Director of Supplier Quality", "business_unit": "Global Supply Chain", "products": ["Supplier Collaboration"], "influence": "high", "interest": "high", "interview": "04-daniel-okafor.md", "email": "daniel.okafor@example.com", "update_audience": "summary"},
+    {"name": "Hannah Liu", "role": "PLM Platform Lead", "business_unit": "Engineering IT", "products": ["PLM / 3DEXPERIENCE", "CAD Data Management", "PLM-SAP Integration"], "influence": "medium", "interest": "high", "interview": "05-hannah-liu.md", "email": "hannah.liu@example.com", "update_audience": "detailed"},
+    {"name": "Tomas Rivera", "role": "Export Compliance Manager", "business_unit": "Trade Compliance", "products": ["Engineering Data Governance"], "influence": "high", "interest": "medium", "interview": "06-tomas-rivera.md", "email": "tomas.rivera@example.com", "update_audience": "summary"},
+    {"name": "Grace Whitfield", "role": "VP Product Engineering", "business_unit": "eMobility", "products": ["CAD Data Management", "Engineering Data Governance"], "influence": "high", "interest": "high", "interview": "07-grace-whitfield.md", "email": "grace.whitfield@example.com", "update_audience": "summary"},
+    {"name": "Kenji Watanabe", "role": "Senior Design Engineer", "business_unit": "Electrical Products", "products": ["PLM / 3DEXPERIENCE", "CAD Data Management"], "influence": "low", "interest": "high", "interview": "08-kenji-watanabe.md", "email": "kenji.watanabe@example.com", "update_audience": ""}
+  ]
+}

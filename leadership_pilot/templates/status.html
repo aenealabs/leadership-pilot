@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% macro dot(level) %}<span class="rag rag-{{ level }}" title="{{ level }}"></span>{% endmacro %}
+{% block content %}
+<div class="page-header">
+  <h1>Status &amp; risks</h1>
+  {% if a %}<span class="muted">As of {{ d_label(a.as_of) }} · current quarter {{ q_label(a.quarter) }} · computed by rules, not AI.</span>{% endif %}
+  <a class="button contained" style="margin-left:auto" href="/updates"><span class="material-symbols-outlined">edit_note</span>Weekly update</a>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if notice %}<div class="banner success"><span class="material-symbols-outlined">check_circle</span><div>{{ notice }}</div></div>{% endif %}
+
+{% if not a %}
+<div class="card"><div class="empty"><span class="material-symbols-outlined">monitoring</span><h3>No status data yet</h3></div></div>
+{% else %}
+
+{% if a.warnings %}
+<div class="card warnings-card">
+  <div class="card-header"><span class="material-symbols-outlined" style="color:var(--warning)">warning</span><h3>Early warnings</h3><span class="chip warning">{{ a.warnings | length }}</span></div>
+  <ul class="list">
+    {% for w in a.warnings %}
+    <li class="list-item">
+      <div class="text">
+        <div class="primary">{{ w.title }}</div>
+        <div class="secondary">{{ warning_rules[w.kind] }} · {% for fid in w.fact_ids %}<a class="mono" href="#{{ fid }}">{{ fid }}</a>{{ ', ' if not loop.last }}{% endfor %}</div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-header"><h3>Products</h3><span class="muted" style="margin-left:auto;font-size:12px">Open a status to see the rule and the numbers behind it.</span></div>
+  <table class="rag-table">
+    <thead><tr><th>Product</th><th>Overall</th>{% for dname in dims %}<th>{{ dname | title }}</th>{% endfor %}</tr></thead>
+    <tbody>
+    {% for p in a.products %}
+      <tr>
+        <td class="primary">{{ p.name }}</td>
+        <td>{{ dot(p.overall) }} <strong>{{ p.overall | title }}</strong></td>
+        {% for dname in dims %}{% set dim = p.dims[dname] %}
+        <td>
+          {% if dim.reasons %}
+          <details><summary>{{ dot(dim.level) }} {{ dim.level | title }}</summary>
+            {% for rule, ids in dim.reasons %}<div class="rule">{{ rule }}<br>{% for fid in ids %}<span class="fact-ref" title="{{ facts[fid].text }}"><a class="mono" href="#{{ fid }}">{{ fid }}</a></span> {% endfor %}</div>{% endfor %}
+          </details>
+          {% else %}{{ dot(dim.level) }} <span class="muted">{{ dim.level | title }}</span>{% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Facts</h3><span class="muted" style="margin-left:auto;font-size:12px">The weekly update may only say what these say.</span></div>
+    <table class="facts">
+      <tbody>
+      {% for f in a.facts %}
+        <tr id="{{ f.id }}"><td class="mono">{{ f.id }}</td><td>{{ f.text }}<div class="muted" style="font-size:11px">{{ f.source }}</div></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <div class="card">
+      <div class="card-header"><h3>Data sources</h3></div>
+      <div class="card-body source-list">
+        <div><span class="overline">Roadmap</span><br>{{ snap.source }}, as of {{ d_label(snap.as_of) }}<br><span class="muted" style="font-size:12px">loaded by {{ snap.fetched_by }}</span></div>
+        {% if suite_connected %}
+        <form method="post" action="/status/refresh"><button class="button outlined" type="submit"><span class="material-symbols-outlined">sync</span>Refresh from Backlog Pilot</button></form>
+        {% else %}<div class="muted" style="font-size:12px">Connect Backlog Pilot (LP_BACKLOG_URL, LP_SUITE_TOKEN) to refresh live.</div>{% endif %}
+        <div><span class="overline">RAID log</span><br><a href="/raid">{{ a.facts | selectattr('source', 'equalto', 'RAID log') | list | length }} open items cited</a></div>
+        <div><span class="overline">Budget</span><br>{{ budget_rows }} rows (plan vs actuals, $K)</div>
+        <form method="post" action="/status/budget" enctype="multipart/form-data" class="upload">
+          <input type="file" name="file" accept=".csv,text/csv" required aria-label="Budget CSV">
+          <button class="button text" type="submit">Import CSV</button>
+        </form>
+        <div class="muted" style="font-size:12px">Columns: product, month (YYYY-MM), plan_k, actual_k. Importing replaces the budget.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Rules</h3></div>
+      <div class="card-body"><ul class="tight">{% for k, r in rules.items() %}<li style="font-size:13px">{{ r }}</li>{% endfor %}</ul></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Interviews</h1>
+  <span class="muted">{{ counts.accepted }} of {{ counts.interviews }} reviewed. Notes are visible only to the tour owner and approvers.</span>
+  {% set n_notes = interviews | selectattr('status', 'equalto', 'notes') | list | length %}
+  {% set n_drafts = interviews | selectattr('status', 'equalto', 'extracted') | list | length %}
+  <span style="margin-left:auto"></span>
+  {% if n_notes %}<form method="post" action="/interviews/extract-all" onsubmit="this.querySelector('button').disabled=true">
+    <button class="button outlined" type="submit" title="Draft an extraction for every interview that only has notes"><span class="material-symbols-outlined">auto_awesome</span>Extract all ({{ n_notes }})</button></form>{% endif %}
+  {% if n_drafts %}<form method="post" action="/interviews/accept-all">
+    <button class="button outlined" type="submit" title="Accept every drafted extraction unchanged; logged as accepted as drafted"><span class="material-symbols-outlined">done_all</span>Accept all extracted ({{ n_drafts }})</button></form>{% endif %}
+  <a class="button contained" href="/interviews/new"><span class="material-symbols-outlined">add</span>New interview</a>
+</div>
+<div class="card">
+  <ul class="list">
+    {% for iv in interviews %}{% set sh = people[iv.stakeholder_id] %}
+    <li class="list-item clickable" onclick="location.href='/interviews/{{ iv.id }}'">
+      <span class="avatar"><span class="material-symbols-outlined">record_voice_over</span></span>
+      <div class="text">
+        <a class="primary" href="/interviews/{{ iv.id }}" style="color:inherit;text-decoration:none">{{ sh.name }} · {{ sh.role }}</a>
+        <div class="secondary">{{ sh.business_unit }} · {{ iv.held_on }}</div>
+      </div>
+      <span class="chip {{ 'trace-traced' if iv.status == 'accepted' else ('trace-unverified' if iv.status == 'extracted' else 'outlined') }}">
+        {{ {'notes': 'Notes only', 'extracted': 'Ready to review', 'accepted': 'Reviewed'}[iv.status] }}</span>
+      <span class="mono muted">{{ iv.key }}</span>
+    </li>
+    {% else %}
+    <li class="list-item muted">No interviews yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

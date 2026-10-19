@@ -1,0 +1,220 @@
+{
+  "input": "As of Oct 16, 2026. Current quarter: Q4 2026.\n\nComputed status (rules, not yours to change):\n- plm | PLM / 3DEXPERIENCE | overall red | schedule red, scope green, budget green, risk red\n- cad | CAD Data Management | overall green | schedule green, scope green, budget green, risk green\n- plm-sap | PLM-SAP Integration | overall red | schedule red, scope green, budget red, risk amber\n- data-gov | Engineering Data Governance | overall red | schedule green, scope red, budget green, risk red\n- supplier | Supplier Collaboration | overall amber | schedule green, scope green, budget amber, risk green\n\nEarly warnings:\n- plm-sap | PLM-SAP Integration: 3 features moved out of Q4 2026 in two weeks | F-9, F-10, F-11\n- plm-sap | PLM-SAP Integration: spend 13% ahead of plan | F-12\n- plm | RAID-1 SSO and MFA rollout blocked on the identity team: mitigation overdue since Oct 9, 2026 | F-4\n- data-gov | RAID-2 No one owns the legacy part export classification backfill: no owner | F-20\n- plm-sap | RAID-3 SAP S/4 transport window from the SAP CoE: due Oct 28, 2026, not confirmed | F-13\n\nFacts:\nF-1 | plm | PLM / 3DEXPERIENCE: 4 features planned for Q4 2026 (1 in progress); load 26 of 21 capacity points (124%).\nF-2 | plm | BP-109 Single sign-on and MFA for all PLM roles is blocked and planned for Q4 2026.\nF-3 | plm | PLM / 3DEXPERIENCE: spent $550K against a plan of $545K for Jul 2026 to Sep 2026, 1% over plan.\nF-4 | plm | Risk RAID-1: SSO and MFA rollout blocked on the identity team (impact high, probability high; Hannah Liu; mitigation due Oct 9, 2026, overdue).\nF-5 | cad | CAD Data Management: 2 features planned for Q4 2026 (1 in progress); load 11 of 13 capacity points (85%).\nF-6 | cad | CAD Data Management: spent $268K against a plan of $275K for Jul 2026 to Sep 2026, 3% under plan.\nF-7 | cad | Risk RAID-5: Vault vendor support ends in 2027 (impact high, probability low; Hannah Liu; mitigation due Mar 31, 2027).\nF-8 | plm-sap | PLM-SAP Integration: 1 feature planned for Q4 2026 (1 in progress); load 13 of 13 capacity points (100%).\nF-9 | plm-sap | BP-104 Integration error dashboard moved from Q4 2026 to Q1 2027 on Oct 6, 2026 (WSJF re-scored on BP-103: job size 8 to 13 after SAP field mapping review; by Elena Kovacs).\nF-10 | plm-sap | BP-105 BOM effectivity date sync moved from Q4 2026 to Q1 2027 on Oct 6, 2026 (WSJF re-scored on BP-103: job size 8 to 13 after SAP field mapping review; by Elena Kovacs).\nF-11 | plm-sap | BP-106 Plant notification of released changes moved from Q4 2026 to Q2 2027 on Oct 13, 2026 (Capacity for 2026-Q4 set to 13 (was 16): two engineers moved to the S/4 cutover; by Hannah Liu).\nF-12 | plm-sap | PLM-SAP Integration: spent $411K against a plan of $365K for Jul 2026 to Sep 2026, 13% over plan.\nF-13 | plm-sap | Dependency RAID-3: SAP S/4 transport window from the SAP CoE (due Oct 28, 2026, not confirmed; Elena Kovacs).\nF-14 | plm-sap | Issue RAID-4: Silent BOM transfer failures continue (impact high; Hannah Liu; due Oct 31, 2026).\nF-15 | data-gov | Engineering Data Governance: 2 features planned for Q4 2026 (1 in progress); load 10 of 13 capacity points (77%).\nF-16 | data-gov | BP-141 Duplicate part detection at creation (5 points) was added on Oct 2, 2026 (Approved intake INT-14: duplicate parts across business units).\nF-17 | data-gov | BP-142 Export classification backfill for legacy parts (8 points) was added on Oct 9, 2026 (Approved intake INT-15: export control not enforced by the systems).\nF-18 | data-gov | Engineering Data Governance: 13 points of new features added in the last 28 days, 100% of Q4 2026 capacity (13 points).\nF-19 | data-gov | Engineering Data Governance: spent $183K against a plan of $185K for Jul 2026 to Sep 2026, 1% under plan.\nF-20 | data-gov | Risk RAID-2: No one owns the legacy part export classification backfill (impact high, probability medium; no owner; mitigation due Nov 15, 2026).\nF-21 | supplier | Supplier Collaboration: 2 features planned for Q4 2026 (1 in progress); load 13 of 13 capacity points (100%).\nF-22 | supplier | Supplier Collaboration: spent $227K against a plan of $215K for Jul 2026 to Sep 2026, 6% over plan.\nF-23 | supplier | Assumption RAID-6: Top 50 suppliers will use the portal for acknowledgements (Daniel Okafor; check by Dec 15, 2026).\nF-24 | supplier | Risk RAID-7: Supplier portal licences cost more than planned (impact medium, probability medium; Daniel Okafor; mitigation due Nov 30, 2026).",
+  "update": {
+    "subject": "Product Engineering IT weekly update: Oct 16, 2026",
+    "summary": [
+      {
+        "text": "Three products need attention this week: PLM / 3DEXPERIENCE, PLM-SAP Integration, and Engineering Data Governance.",
+        "fact_ids": [
+          "F-4",
+          "F-9",
+          "F-10",
+          "F-11",
+          "F-18"
+        ]
+      },
+      {
+        "text": "PLM-SAP Integration moved 3 features out of Q4 2026 in two weeks and is spending 13% over plan, while the SAP S/4 transport window due Oct 28, 2026 is still not confirmed.",
+        "fact_ids": [
+          "F-9",
+          "F-10",
+          "F-11",
+          "F-12",
+          "F-13"
+        ]
+      },
+      {
+        "text": "The PLM single sign-on and MFA rollout is blocked on the identity team, with mitigation overdue since Oct 9, 2026.",
+        "fact_ids": [
+          "F-2",
+          "F-4"
+        ]
+      },
+      {
+        "text": "Engineering Data Governance took on 13 points of new work, 100% of its Q4 2026 capacity, and the export classification backfill has no owner.",
+        "fact_ids": [
+          "F-18",
+          "F-20"
+        ]
+      }
+    ],
+    "products": [
+      {
+        "product_key": "plm",
+        "sentences": [
+          {
+            "text": "BP-109 Single sign-on and MFA for all PLM roles is blocked on the identity team, and the RAID-1 mitigation owned by Hannah Liu has been overdue since Oct 9, 2026.",
+            "fact_ids": [
+              "F-2",
+              "F-4"
+            ]
+          },
+          {
+            "text": "Q4 2026 is overloaded, with 4 features planned against a load of 26 of 21 capacity points (124%).",
+            "fact_ids": [
+              "F-1"
+            ]
+          },
+          {
+            "text": "Spend is close to plan at $550K against $545K for Jul 2026 to Sep 2026, 1% over.",
+            "fact_ids": [
+              "F-3"
+            ]
+          }
+        ]
+      },
+      {
+        "product_key": "cad",
+        "sentences": [
+          {
+            "text": "CAD Data Management is on track, with 2 features planned for Q4 2026 at 85% load and spend 3% under plan.",
+            "fact_ids": [
+              "F-5",
+              "F-6"
+            ]
+          },
+          {
+            "text": "The team is tracking the end of Vault vendor support in 2027, with mitigation due Mar 31, 2027.",
+            "fact_ids": [
+              "F-7"
+            ]
+          }
+        ]
+      },
+      {
+        "product_key": "plm-sap",
+        "sentences": [
+          {
+            "text": "BP-104 Integration error dashboard and BP-105 BOM effectivity date sync moved from Q4 2026 to Q1 2027 on Oct 6, 2026 after the SAP field mapping review raised BP-103's job size from 8 to 13.",
+            "fact_ids": [
+              "F-9",
+              "F-10"
+            ]
+          },
+          {
+            "text": "BP-106 Plant notification of released changes moved to Q2 2027 on Oct 13, 2026 after Q4 2026 capacity was cut from 16 to 13 points, because two engineers moved to the S/4 cutover.",
+            "fact_ids": [
+              "F-11"
+            ]
+          },
+          {
+            "text": "Spend is $411K against a plan of $365K for Jul 2026 to Sep 2026, 13% over plan.",
+            "fact_ids": [
+              "F-12"
+            ]
+          },
+          {
+            "text": "Next, the team needs the SAP CoE to confirm the S/4 transport window due Oct 28, 2026 and to resolve the silent BOM transfer failures by Oct 31, 2026.",
+            "fact_ids": [
+              "F-13",
+              "F-14"
+            ]
+          }
+        ]
+      },
+      {
+        "product_key": "data-gov",
+        "sentences": [
+          {
+            "text": "Two approved intakes added 13 points of new work in the last 28 days, equal to 100% of Q4 2026 capacity.",
+            "fact_ids": [
+              "F-16",
+              "F-17",
+              "F-18"
+            ]
+          },
+          {
+            "text": "The additions are BP-141 Duplicate part detection at creation (5 points, added Oct 2, 2026) and BP-142 Export classification backfill for legacy parts (8 points, added Oct 9, 2026).",
+            "fact_ids": [
+              "F-16",
+              "F-17"
+            ]
+          },
+          {
+            "text": "No one owns the export classification backfill yet, and its mitigation is due Nov 15, 2026.",
+            "fact_ids": [
+              "F-20"
+            ]
+          },
+          {
+            "text": "Budget is on plan at $183K against $185K, 1% under.",
+            "fact_ids": [
+              "F-19"
+            ]
+          }
+        ]
+      },
+      {
+        "product_key": "supplier",
+        "sentences": [
+          {
+            "text": "Supplier Collaboration spent $227K against a plan of $215K for Jul 2026 to Sep 2026, 6% over plan.",
+            "fact_ids": [
+              "F-22"
+            ]
+          },
+          {
+            "text": "Daniel Okafor is working the risk that portal licences cost more than planned, with mitigation due Nov 30, 2026.",
+            "fact_ids": [
+              "F-24"
+            ]
+          },
+          {
+            "text": "Delivery is on schedule with 2 features at 100% load, and the assumption that the top 50 suppliers will use the portal is due for a check by Dec 15, 2026.",
+            "fact_ids": [
+              "F-21",
+              "F-23"
+            ]
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "text": "Leadership needs to name an owner for the legacy part export classification backfill (RAID-2) before its mitigation date of Nov 15, 2026.",
+        "fact_ids": [
+          "F-20"
+        ]
+      },
+      {
+        "text": "Leadership help is needed to unblock the SSO and MFA rollout with the identity team, as the RAID-1 mitigation has been overdue since Oct 9, 2026.",
+        "fact_ids": [
+          "F-4"
+        ]
+      },
+      {
+        "text": "Leadership help is needed to get the SAP CoE to confirm the S/4 transport window, which is due Oct 28, 2026.",
+        "fact_ids": [
+          "F-13"
+        ]
+      },
+      {
+        "text": "Leadership should decide what to defer on PLM / 3DEXPERIENCE, where Q4 2026 load is 26 of 21 capacity points (124%).",
+        "fact_ids": [
+          "F-1"
+        ]
+      }
+    ],
+    "risks": [
+      {
+        "text": "Silent BOM transfer failures between PLM and SAP continue (impact high), with resolution due Oct 31, 2026.",
+        "fact_ids": [
+          "F-14"
+        ]
+      },
+      {
+        "text": "The PLM SSO and MFA rollout remains blocked on the identity team (impact high, probability high), with mitigation overdue since Oct 9, 2026.",
+        "fact_ids": [
+          "F-4"
+        ]
+      },
+      {
+        "text": "Export control is not enforced by the systems, and the legacy part classification backfill has no owner (impact high, probability medium).",
+        "fact_ids": [
+          "F-17",
+          "F-20"
+        ]
+      }
+    ]
+  }
+}

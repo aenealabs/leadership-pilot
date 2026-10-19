@@ -1,0 +1,119 @@
+{
+  "notes": "Listening tour, week 3. Daniel Okafor, Director of Supplier Quality, Global Supply Chain. 45 minutes.\n\nDaniel opened with numbers: two field escapes this year traced to suppliers building to superseded drawing revisions. \"Each escape cost us more than the whole supplier portal project would.\"\n\nToday a buyer emails a PDF of the changed drawing. \"Nobody confirms the supplier received it, read it, or updated their PPAP.\" Daniel wants change notices sent automatically on release, supplier acknowledgement in a portal, and PPAP resubmission triggered when a change affects form, fit, or function.\n\nDaniel also wants purchasing in the loop: which open purchase orders are affected by a change, so buyers can hold or expedite. \"Today purchasing learns about changes from the supplier, which is backwards.\"\n\nOn priorities, Daniel is blunt: \"Supplier changes keep losing to engineering-internal projects because the people who feel the pain don't sit in your prioritization meeting.\"\n\nSupports Marcus's point on export control: suppliers must only receive what they are licensed for. Daniel is not sure who maintains supplier license data today.\n\nSuccess: no escapes from superseded revisions, and every change acknowledged by the supplier within five business days.\n\nFollow-up: who owns supplier license data, Trade Compliance or Procurement?",
+  "extraction": {
+    "summary": "Daniel Okafor, Director of Supplier Quality in Global Supply Chain, is focused on stopping field escapes caused by suppliers building to superseded drawing revisions. They want automated change notification on release, supplier acknowledgement via a portal, PPAP resubmission triggers, purchasing visibility into affected POs, and a voice for supplier-facing changes in prioritization.",
+    "pain_points": [
+      {
+        "title": "Suppliers building to superseded revisions",
+        "description": "Two field escapes this year were traced to suppliers building to superseded drawing revisions, each costing more than the entire supplier portal project would.",
+        "severity": "critical",
+        "systems": [],
+        "quotes": [
+          "two field escapes this year traced to suppliers building to superseded drawing revisions",
+          "Each escape cost us more than the whole supplier portal project would."
+        ]
+      },
+      {
+        "title": "Manual, unconfirmed change distribution to suppliers",
+        "description": "Changed drawings are sent to suppliers by a buyer emailing a PDF, with no confirmation that the supplier received or read it, or updated their PPAP.",
+        "severity": "high",
+        "systems": [
+          "email"
+        ],
+        "quotes": [
+          "Today a buyer emails a PDF of the changed drawing.",
+          "Nobody confirms the supplier received it, read it, or updated their PPAP."
+        ]
+      },
+      {
+        "title": "Purchasing unaware of changes affecting open POs",
+        "description": "Purchasing has no view of which open purchase orders a change affects and learns of changes from suppliers, preventing them from holding or expediting orders.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "Today purchasing learns about changes from the supplier, which is backwards."
+        ]
+      },
+      {
+        "title": "Supplier-facing work loses in prioritization",
+        "description": "Supplier change capabilities keep being deprioritized behind engineering-internal projects because supplier-side stakeholders are not represented in the prioritization meeting.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "Supplier changes keep losing to engineering-internal projects because the people who feel the pain don't sit in your prioritization meeting."
+        ]
+      },
+      {
+        "title": "Unclear ownership of supplier export license data",
+        "description": "Suppliers must only receive data they are licensed for, but Daniel is not sure who maintains supplier license data today, creating export control risk.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "suppliers must only receive what they are licensed for",
+          "Daniel is not sure who maintains supplier license data today."
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "Change notices sent to suppliers automatically on release, with supplier acknowledgement captured in a portal.",
+        "measure": "Every change acknowledged by the supplier within five business days.",
+        "quotes": [
+          "Daniel wants change notices sent automatically on release, supplier acknowledgement in a portal, and PPAP resubmission triggered when a change affects form, fit, or function.",
+          "every change acknowledged by the supplier within five business days"
+        ]
+      },
+      {
+        "description": "PPAP resubmission automatically triggered when a change affects form, fit, or function.",
+        "measure": "",
+        "quotes": [
+          "PPAP resubmission triggered when a change affects form, fit, or function"
+        ]
+      },
+      {
+        "description": "Eliminate field escapes caused by suppliers building to superseded revisions.",
+        "measure": "No escapes from superseded revisions.",
+        "quotes": [
+          "no escapes from superseded revisions"
+        ]
+      },
+      {
+        "description": "Purchasing sees which open purchase orders are affected by a change so buyers can hold or expedite.",
+        "measure": "",
+        "quotes": [
+          "which open purchase orders are affected by a change, so buyers can hold or expedite"
+        ]
+      },
+      {
+        "description": "Suppliers only receive technical data they are licensed for under export control.",
+        "measure": "",
+        "quotes": [
+          "suppliers must only receive what they are licensed for"
+        ]
+      },
+      {
+        "description": "Supplier-side stakeholders represented in the prioritization process.",
+        "measure": "",
+        "quotes": [
+          "the people who feel the pain don't sit in your prioritization meeting"
+        ]
+      }
+    ],
+    "systems_named": [
+      "supplier portal",
+      "email",
+      "PDF drawings",
+      "PPAP"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "Who owns supplier license data today: Trade Compliance or Procurement?",
+      "What are the details of the two field escapes (parts, suppliers, cost) so the business case can be quantified?",
+      "What is the status and scope of the supplier portal project referenced, and is it funded?",
+      "Which system holds open purchase orders (e.g., SAP), and how should affected POs be identified from a change?",
+      "Who should decide whether a change affects form, fit, or function to trigger PPAP resubmission?",
+      "Would Daniel or a Supplier Quality delegate join the prioritization meeting?",
+      "What exactly was Marcus's export control point that Daniel supports?"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header"><h1>New interview</h1><span class="muted">Paste your notes, or upload notes or a Teams transcript.</span></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+<form method="post" action="/interviews" class="card" enctype="multipart/form-data">
+  <div class="card-body persona-form">
+    <div class="grid-2" style="gap:12px">
+      <div class="field"><label>Stakeholder</label>
+        <select name="stakeholder_id" required>
+          <option value="">Choose…</option>
+          {% for sh in people %}<option value="{{ sh.id }}" {{ 'selected' if selected == sh.id }}>{{ sh.name }} · {{ sh.role }}</option>{% endfor %}
+        </select></div>
+      <div class="field"><label>Date</label><input type="date" name="held_on" value="{{ today }}"></div>
+    </div>
+    <div class="field"><label>Notes</label><textarea name="notes" rows="14" placeholder="What they said, in their words where you can."></textarea></div>
+    <div class="field"><label>Or upload a file</label>
+      <input type="file" name="file" accept=".txt,.md,.docx,.vtt,text/plain,text/vtt">
+      <span class="muted" style="font-size:12px">Text, Word (.docx), or a Teams meeting transcript (.vtt): timestamps are removed and each turn becomes "Speaker: what they said". Anything pasted above is kept first.</span></div>
+    <div class="actions"><button class="button contained" type="submit">Save interview</button></div>
+  </div>
+</form>
+{% endblock %}

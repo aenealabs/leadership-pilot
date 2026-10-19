@@ -1,0 +1,143 @@
+{
+  "notes": "Listening tour, week 1. Hannah Liu, PLM Platform Lead, Engineering IT (my team). 60 minutes.\n\nHannah's team runs 3DEXPERIENCE, the legacy CAD vault, and the PLM-to-SAP interface. \"We spend sixty percent of our time on break-fix and access requests.\" The SAP interface is a nightly batch with no alerting; failures are found by plants. Hannah has asked twice for budget to move it to event-driven integration.\n\nThe legacy CAD vault from an acquired business unit is the top risk: unsupported software, a failed cybersecurity review, and a vendor contract that ends next year. About 400 engineers still use it daily. \"If that vault goes down, a business unit stops.\"\n\nOn requirements: requests arrive by email, Teams, and hallway, \"with no way to say no or later.\" Hannah wants a single intake and a transparent backlog so business leaders can see trade-offs. Hannah pushed back on adding more mandatory ECO fields: \"Every field we add, engineers find a way around. We need smarter defaults, not more fields.\"\n\nData quality: three part masters after the acquisitions, no common classification, no scorecard.\n\nTeam: strong on platform skills, thin on product management. Two people are at burnout risk.\n\nSuccess: break-fix under 30 percent of time, and the vault retired on schedule.\n\nFollow-up: get the cybersecurity finding report on the vault.",
+  "extraction": {
+    "summary": "Hannah Liu is the PLM Platform Lead in Engineering IT (on the new manager's own team), running 3DEXPERIENCE, the legacy CAD vault, and the PLM-to-SAP interface. Their top concerns are retiring the unsupported legacy CAD vault from an acquired business unit before its vendor contract ends next year, cutting break-fix load from sixty percent to under 30 percent of team time, and putting a single intake and transparent backlog in place for requests.",
+    "pain_points": [
+      {
+        "title": "Legacy CAD vault is an unsupported, insecure single point of failure",
+        "description": "The legacy CAD vault from an acquired business unit runs unsupported software, failed a cybersecurity review, and its vendor contract ends next year. About 400 engineers still use it daily, and an outage would stop a business unit.",
+        "severity": "critical",
+        "systems": [
+          "legacy CAD vault"
+        ],
+        "quotes": [
+          "The legacy CAD vault from an acquired business unit is the top risk: unsupported software, a failed cybersecurity review, and a vendor contract that ends next year.",
+          "About 400 engineers still use it daily.",
+          "\"If that vault goes down, a business unit stops.\""
+        ]
+      },
+      {
+        "title": "Team consumed by break-fix and access requests",
+        "description": "Hannah's team spends most of its time on reactive break-fix and access requests, which leaves little capacity for improvement work.",
+        "severity": "high",
+        "systems": [
+          "3DEXPERIENCE",
+          "legacy CAD vault",
+          "PLM-to-SAP interface"
+        ],
+        "quotes": [
+          "\"We spend sixty percent of our time on break-fix and access requests.\""
+        ]
+      },
+      {
+        "title": "PLM-to-SAP interface fails silently",
+        "description": "The PLM-to-SAP integration is a nightly batch with no alerting, so plants are the ones who discover failures. Hannah has asked twice for budget to move it to event-driven integration.",
+        "severity": "high",
+        "systems": [
+          "PLM-to-SAP interface",
+          "SAP"
+        ],
+        "quotes": [
+          "The SAP interface is a nightly batch with no alerting; failures are found by plants.",
+          "Hannah has asked twice for budget to move it to event-driven integration."
+        ]
+      },
+      {
+        "title": "No structured intake or prioritization for requests",
+        "description": "Requests arrive through informal channels with no way to decline or defer them, and business leaders cannot see the trade-offs.",
+        "severity": "medium",
+        "systems": [
+          "Teams"
+        ],
+        "quotes": [
+          "requests arrive by email, Teams, and hallway, \"with no way to say no or later.\""
+        ]
+      },
+      {
+        "title": "Mandatory ECO fields drive workarounds",
+        "description": "Hannah pushed back on adding more mandatory ECO fields because engineers work around added fields. Hannah prefers smarter defaults.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "\"Every field we add, engineers find a way around. We need smarter defaults, not more fields.\""
+        ]
+      },
+      {
+        "title": "Fragmented part masters with no data quality measurement",
+        "description": "The acquisitions left three part masters with no common classification and no data quality scorecard.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "Data quality: three part masters after the acquisitions, no common classification, no scorecard."
+        ]
+      },
+      {
+        "title": "Product management skill gap and burnout risk on the team",
+        "description": "The team is strong on platform skills but thin on product management, and two people are at risk of burnout.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "Team: strong on platform skills, thin on product management.",
+          "Two people are at burnout risk."
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "Reduce break-fix work to under 30 percent of team time.",
+        "measure": "Break-fix under 30 percent of team time (currently sixty percent).",
+        "quotes": [
+          "Success: break-fix under 30 percent of time, and the vault retired on schedule.",
+          "\"We spend sixty percent of our time on break-fix and access requests.\""
+        ]
+      },
+      {
+        "description": "Retire the legacy CAD vault on schedule.",
+        "measure": "Vault retired on schedule.",
+        "quotes": [
+          "Success: break-fix under 30 percent of time, and the vault retired on schedule."
+        ]
+      },
+      {
+        "description": "A single intake and a transparent backlog so business leaders can see trade-offs.",
+        "measure": "",
+        "quotes": [
+          "Hannah wants a single intake and a transparent backlog so business leaders can see trade-offs."
+        ]
+      },
+      {
+        "description": "Move the PLM-to-SAP interface from nightly batch to event-driven integration.",
+        "measure": "",
+        "quotes": [
+          "Hannah has asked twice for budget to move it to event-driven integration."
+        ]
+      },
+      {
+        "description": "Smarter defaults in ECOs instead of more mandatory fields.",
+        "measure": "",
+        "quotes": [
+          "\"Every field we add, engineers find a way around. We need smarter defaults, not more fields.\""
+        ]
+      }
+    ],
+    "systems_named": [
+      "3DEXPERIENCE",
+      "legacy CAD vault",
+      "PLM-to-SAP interface",
+      "SAP",
+      "Teams",
+      "email"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "Can you share the cybersecurity finding report on the legacy CAD vault?",
+      "What is the exact vendor contract end date for the vault, and is there a migration plan or target system (e.g., 3DEXPERIENCE) for its ~400 users?",
+      "Why were the two budget requests for event-driven SAP integration declined, and what was the estimated cost?",
+      "How often does the nightly SAP batch fail, and what is the impact on plants when it does?",
+      "How does the sixty percent break-fix time split between break-fix and access requests, and which systems drive most of it?",
+      "Who is proposing the additional mandatory ECO fields, and what smarter defaults would you suggest?",
+      "Is there an owner or plan for consolidating the three part masters and defining a common classification?",
+      "Which two team members are at burnout risk, and what immediate relief would help them?"
+    ]
+  }
+}

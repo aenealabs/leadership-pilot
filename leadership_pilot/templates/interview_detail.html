@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% macro quotes(key) %}
+{% set t = traces[key] %}
+{% for q, ok in t.quotes %}<span class="quote {{ '' if ok else 'bad' }}" title="{{ 'Found in the notes' if ok else 'Not found in the notes' }}">“{{ q }}”{% if not ok %} <strong>· quote not found</strong>{% endif %}</span>{% endfor %}
+{% if t.status == 'inferred' %}<span class="chip trace-inferred">AI inference: no quote supports this</span>{% endif %}
+{% endmacro %}
+{% block content %}
+<div class="page-header">
+  <h1>{{ sh.name }}</h1>
+  <span class="muted">{{ sh.role }} · {{ sh.business_unit }} · {{ iv.held_on }} · {{ iv.key }}</span>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if accepted_now %}
+<div class="banner success"><span class="material-symbols-outlined">check_circle</span>
+  <div><strong>Accepted {{ concerns | selectattr('kind', 'equalto', 'pain_point') | list | length | plural('pain point') }},
+    {{ concerns | selectattr('kind', 'equalto', 'outcome') | list | length | plural('outcome') }}, and
+    {{ concerns | selectattr('kind', 'equalto', 'follow_up') | list | length | plural('follow-up') }}.</strong>
+    They are now part of {{ sh.name }}'s record. <a href="/stakeholders/{{ sh.id }}">Open the stakeholder</a> · <a href="/interviews">Next interview</a></div></div>
+{% endif %}
+
+<div class="grid-2" style="grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr)">
+  <div class="card source-panel">
+    <div class="card-header"><h3>Notes</h3>
+      {% if coverage %}<span class="chip trace-traced" style="margin-left:auto">{{ coverage.traced }} of {{ draft.pain_points | length }} pain points traced</span>{% endif %}</div>
+    <div class="card-body notes-text">{% if segments %}{% for seg in segments %}{% if seg.paths %}<mark data-paths="{{ seg.paths | join(' ') }}">{{ seg.text }}</mark>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% else %}{{ iv.notes }}{% endif %}</div>
+  </div>
+
+  <div>
+    {% if not draft %}
+    <div class="card"><div class="empty">
+      <span class="material-symbols-outlined">auto_awesome</span>
+      <h3>Not extracted yet</h3>
+      <p>The AI drafts pain points, outcomes, systems, and follow-ups, each backed by quotes from these notes. You review before anything is kept.</p>
+      <form method="post" action="/interviews/{{ iv.id }}/extract">
+        <button class="button contained" type="submit"><span class="material-symbols-outlined">auto_awesome</span>Extract</button></form>
+    </div></div>
+    {% else %}
+    <form method="post" action="/interviews/{{ iv.id }}/accept" class="card">
+      <div class="card-header"><h3>{{ 'Reviewed extraction' if iv.status == 'accepted' else 'Review the extraction' }}</h3>
+        <span class="chip outlined" style="margin-left:auto">Urgency: {{ draft.urgency }}</span></div>
+      <div class="card-body">
+        <div class="banner info"><span class="material-symbols-outlined">info</span>
+          <div><strong>{{ draft.summary }}</strong><br><span class="muted">{{ iv.extracted_by }}. Untick anything that isn't right, fix titles or severity, then accept.
+          {% if iv.status == 'accepted' %} Accepting again replaces the reviewed set.{% endif %}</span></div></div>
+
+        <div class="overline">Pain points</div>
+        {% for p in draft.pain_points %}{% set k = 'pain:' ~ loop.index0 %}
+        <div class="pain">
+          <div class="pain-head">
+            <input type="checkbox" name="{{ k }}" {{ 'checked' if iv.status != 'accepted' or k in accepted_keys }} aria-label="Keep pain point">
+            <input class="inline" type="text" name="pain_title:{{ loop.index0 }}" value="{{ p.title }}" aria-label="Pain point title">
+            <select name="pain_severity:{{ loop.index0 }}" aria-label="Severity" data-ai="{{ p.severity }}">
+              {% for sev in severities %}<option {{ 'selected' if sev == p.severity }}>{{ sev }}</option>{% endfor %}</select>
+            <input class="inline severity-reason" type="text" name="pain_severity_reason:{{ loop.index0 }}" placeholder="Why change the AI's rating?" aria-label="Why you changed the severity" hidden>
+          </div>
+          <div class="pain-body">
+            <div>{{ p.description }}</div>
+            {% if p.systems %}<div style="margin:4px 0">{% for sys in p.systems %}<span class="chip outlined" style="margin-right:4px">{{ sys }}</span>{% endfor %}</div>{% endif %}
+            {{ quotes('p' ~ loop.index0) }}
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="overline">Desired outcomes</div>
+        {% for o in draft.desired_outcomes %}{% set k = 'outcome:' ~ loop.index0 %}
+        <div class="check-row"><input type="checkbox" name="{{ k }}" {{ 'checked' if iv.status != 'accepted' or k in accepted_keys }} aria-label="Keep outcome">
+          <div><div>{{ o.description }}</div>{% if o.measure %}<div class="muted">Measure: {{ o.measure }}</div>{% endif %}{{ quotes('o' ~ loop.index0) }}</div></div>
+        {% endfor %}
+
+        {% if draft.systems_named %}<div class="overline">Systems named</div>
+        <div>{% for sys in draft.systems_named %}<span class="chip outlined" style="margin:0 4px 4px 0">{{ sys }}</span>{% endfor %}</div>{% endif %}
+
+        <div class="overline">Follow-up questions</div>
+        {% for q in draft.follow_up_questions %}{% set k = 'follow:' ~ loop.index0 %}
+        <div class="check-row"><input type="checkbox" name="{{ k }}" {{ 'checked' if iv.status != 'accepted' or k in accepted_keys }} aria-label="Keep follow-up"><div>{{ q }}</div></div>
+        {% endfor %}
+
+        <label class="drop-reason">Why you dropped items <span class="muted">(needed if you untick anything the AI extracted)</span>
+          <textarea name="drop_reason" rows="2" placeholder="e.g. the follow-up was answered later in the interview"></textarea></label>
+        <div class="actions">
+          {% if not user.approver %}<span class="muted">Only approvers can accept.</span>{% endif %}
+          <button class="button contained success" type="submit"><span class="material-symbols-outlined">task_alt</span>Accept into {{ sh.name }}'s record</button>
+        </div>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{
+  "notes": "Listening tour, week 4. Grace Whitfield, VP Product Engineering, eMobility. 30 minutes.\n\nGrace's business is growing fastest and is the newest to the PLM platform. \"We're designing on three systems because of two acquisitions. My engineers lose hours a week finding the right version of a part.\"\n\nDuplicate parts are a cost issue for Grace: a sample review found 14 percent of new connectors were near-duplicates. \"That's inventory, supplier count, and qualification cost we're paying for twice.\"\n\nGrace's ask of IT is predictability. \"Tell me what we will get this year and what we won't. A clear no is better than a maybe that never arrives.\" Wants a roadmap reviewed with engineering leadership, tied to business outcomes, not a list of tickets.\n\nOn the legacy CAD vault: eMobility depends on it for older designs. Grace supports retiring it but \"only if migration doesn't stop my teams for weeks.\" Wants a wave plan agreed with engineering.\n\nOn data: no reliable view of data quality across business units. Grace would sponsor a data quality scorecard if it is visible to leadership.\n\nSuccess: one system of record for eMobility parts, a 50 percent cut in new duplicates, and a roadmap leadership trusts.\n\nFollow-up: confirm eMobility's peak design periods before planning vault migration waves.",
+  "extraction": {
+    "summary": "Grace Whitfield is VP Product Engineering for eMobility, the fastest-growing business and the newest to the PLM platform, currently designing across three systems inherited from two acquisitions. What matters most to them is one system of record for eMobility parts, cutting duplicate parts, a predictable IT roadmap that leadership trusts, and a legacy CAD vault retirement that doesn't stall their teams.",
+    "pain_points": [
+      {
+        "title": "Designing on three systems after acquisitions",
+        "description": "Two acquisitions left eMobility designing on three systems, so engineers lose hours each week finding the right version of a part.",
+        "severity": "high",
+        "systems": [
+          "PLM"
+        ],
+        "quotes": [
+          "We're designing on three systems because of two acquisitions. My engineers lose hours a week finding the right version of a part."
+        ]
+      },
+      {
+        "title": "Duplicate parts drive cost",
+        "description": "A sample review found 14 percent of new connectors were near-duplicates. This doubles inventory, supplier count, and qualification cost.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "a sample review found 14 percent of new connectors were near-duplicates",
+          "That's inventory, supplier count, and qualification cost we're paying for twice."
+        ]
+      },
+      {
+        "title": "IT delivery is unpredictable",
+        "description": "Grace lacks a clear view of what IT will and won't deliver this year. They want a roadmap tied to business outcomes rather than a list of tickets.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "Tell me what we will get this year and what we won't. A clear no is better than a maybe that never arrives."
+        ]
+      },
+      {
+        "title": "Legacy CAD vault migration risk",
+        "description": "eMobility depends on the legacy CAD vault for older designs. Grace supports retiring it, but a migration that halts their teams for weeks is a risk.",
+        "severity": "medium",
+        "systems": [
+          "legacy CAD vault"
+        ],
+        "quotes": [
+          "eMobility depends on it for older designs",
+          "only if migration doesn't stop my teams for weeks."
+        ]
+      },
+      {
+        "title": "No cross-BU view of data quality",
+        "description": "There is no reliable view of data quality across business units.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "no reliable view of data quality across business units"
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "One system of record for eMobility parts",
+        "measure": "",
+        "quotes": [
+          "one system of record for eMobility parts"
+        ]
+      },
+      {
+        "description": "Fewer newly created duplicate parts",
+        "measure": "50 percent cut in new duplicates",
+        "quotes": [
+          "a 50 percent cut in new duplicates"
+        ]
+      },
+      {
+        "description": "A roadmap reviewed with engineering leadership, tied to business outcomes, with clear commitments and clear no's",
+        "measure": "A roadmap leadership trusts",
+        "quotes": [
+          "a roadmap leadership trusts",
+          "Tell me what we will get this year and what we won't. A clear no is better than a maybe that never arrives."
+        ]
+      },
+      {
+        "description": "A wave plan for legacy CAD vault retirement agreed with engineering, avoiding weeks-long stoppages",
+        "measure": "",
+        "quotes": [
+          "only if migration doesn't stop my teams for weeks."
+        ]
+      },
+      {
+        "description": "A data quality scorecard visible to leadership, which Grace would sponsor",
+        "measure": "",
+        "quotes": [
+          "Grace would sponsor a data quality scorecard if it is visible to leadership."
+        ]
+      }
+    ],
+    "systems_named": [
+      "PLM",
+      "legacy CAD vault"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "When are eMobility's peak design periods, so vault migration waves can avoid them?",
+      "What are the three design systems in use, and which came from each acquisition?",
+      "Which system should be the system of record for eMobility parts?",
+      "How was the 14 percent near-duplicate connector figure measured, and is it representative of other part categories?",
+      "What is the baseline rate of new duplicates for measuring a 50 percent cut?",
+      "How long a migration disruption is acceptable to eMobility teams (days rather than weeks)?",
+      "Which data quality metrics would leadership want to see on the scorecard?",
+      "Who in engineering leadership should review the roadmap, and how often?"
+    ]
+  }
+}

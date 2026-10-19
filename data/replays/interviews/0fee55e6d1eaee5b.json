@@ -1,0 +1,105 @@
+{
+  "notes": "Listening tour, week 2. Priya Raman, Director of Engineering, Electrical Products. 45 minutes.\n\nBiggest frustration is engineering change. \"Our ECOs take three weeks and nobody can tell me where they are.\" Priya tracks escalations in a personal spreadsheet because the PLM workflow view is \"unusable for a manager.\" About a third of ECOs bounce back for missing information, usually the affected-parts list or cost impact. Priya wants the system to stop incomplete changes at submission: \"Make the fields mandatory. If it isn't complete, it shouldn't leave the engineer's desk.\"\n\nOn IT: \"We submit requests to IT and they disappear. I don't know if something is in the backlog, being built, or dead.\" Wants a single view of what engineering asked for and where it stands, reviewed quarterly with engineering leadership.\n\nSecond concern is duplicate parts. New hires create part numbers rather than search, because search \"takes longer than drawing it again.\" Priya estimates a few hundred duplicate fasteners in the last year.\n\nPlants complain BOM changes arrive in SAP a day or two late; Priya hears about it when a line builds the old revision.\n\nSuccess in a year: ECO cycle time under 10 days, and \"I stop keeping my own spreadsheet.\"\n\nFollow-up: who owns ECO workflow configuration today?",
+  "extraction": {
+    "summary": "Priya Raman, Director of Engineering for Electrical Products, is most frustrated by slow, opaque engineering change: ECOs take three weeks, frequently bounce back for missing information, and lack a usable manager view. They also want visibility into IT requests, fewer duplicate parts, and timely BOM transfer to SAP, with success defined as ECO cycle time under 10 days and no longer needing a personal tracking spreadsheet.",
+    "pain_points": [
+      {
+        "title": "ECO cycle time is long and status is invisible",
+        "description": "ECOs take three weeks and their status cannot be determined; the PLM workflow view is unusable for managers, forcing Priya to track escalations in a personal spreadsheet.",
+        "severity": "high",
+        "systems": [
+          "PLM"
+        ],
+        "quotes": [
+          "\"Our ECOs take three weeks and nobody can tell me where they are.\"",
+          "Priya tracks escalations in a personal spreadsheet because the PLM workflow view is \"unusable for a manager.\""
+        ]
+      },
+      {
+        "title": "Incomplete ECOs bounce back",
+        "description": "About a third of ECOs are returned for missing information, usually the affected-parts list or cost impact, adding rework and delay to the change process.",
+        "severity": "high",
+        "systems": [
+          "PLM"
+        ],
+        "quotes": [
+          "About a third of ECOs bounce back for missing information, usually the affected-parts list or cost impact."
+        ]
+      },
+      {
+        "title": "IT request status is opaque",
+        "description": "Engineering requests submitted to IT disappear, with no visibility into whether they are in the backlog, being built, or dropped.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "\"We submit requests to IT and they disappear. I don't know if something is in the backlog, being built, or dead.\""
+        ]
+      },
+      {
+        "title": "Duplicate parts from poor search",
+        "description": "New hires create new part numbers instead of searching because search is slower than redrawing, producing an estimated few hundred duplicate fasteners in the last year.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "New hires create part numbers rather than search, because search \"takes longer than drawing it again.\"",
+          "Priya estimates a few hundred duplicate fasteners in the last year."
+        ]
+      },
+      {
+        "title": "BOM changes reach SAP late",
+        "description": "BOM changes arrive in SAP a day or two late, which has led to production lines building the old revision.",
+        "severity": "critical",
+        "systems": [
+          "SAP"
+        ],
+        "quotes": [
+          "Plants complain BOM changes arrive in SAP a day or two late; Priya hears about it when a line builds the old revision."
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "Reduce ECO cycle time to under 10 days within a year.",
+        "measure": "ECO cycle time under 10 days",
+        "quotes": [
+          "Success in a year: ECO cycle time under 10 days"
+        ]
+      },
+      {
+        "description": "ECO status visible enough that Priya no longer needs a personal tracking spreadsheet.",
+        "measure": "Priya stops keeping a personal spreadsheet",
+        "quotes": [
+          "\"I stop keeping my own spreadsheet.\""
+        ]
+      },
+      {
+        "description": "System blocks incomplete changes at submission via mandatory fields.",
+        "measure": "",
+        "quotes": [
+          "Priya wants the system to stop incomplete changes at submission: \"Make the fields mandatory. If it isn't complete, it shouldn't leave the engineer's desk.\""
+        ]
+      },
+      {
+        "description": "A single view of engineering's requests to IT and their status, reviewed quarterly with engineering leadership.",
+        "measure": "",
+        "quotes": [
+          "Wants a single view of what engineering asked for and where it stands, reviewed quarterly with engineering leadership."
+        ]
+      }
+    ],
+    "systems_named": [
+      "PLM",
+      "SAP"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "Who owns ECO workflow configuration today?",
+      "Where in the ECO process does most of the three weeks go (drafting, review, approval, rework)?",
+      "Which specific fields should be mandatory at ECO submission beyond the affected-parts list and cost impact?",
+      "How often has a line built an old revision due to late SAP BOM transfer, and what did those incidents cost?",
+      "Is the SAP BOM delay caused by a batch interface, manual steps, or approval timing?",
+      "Which PLM/part search tool do new hires use, and what makes it slow?",
+      "What would a useful manager view of ECO status show?"
+    ]
+  }
+}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% macro cites(s) %}{% for fid in s.fact_ids %}<span class="chip {{ 'outlined' if fid in facts else 'trace-unverified' }} cite-chip" title="{{ facts[fid].text ~ ' (' ~ facts[fid].source ~ ')' if fid in facts else 'Not in the data' }}">{{ fid }}</span>{% endfor %}{% endmacro %}
+{% block content %}
+<div class="page-header">
+  <h1 class="long-title">{{ body.subject }}</h1>
+  <span class="chip {{ 'trace-traced' if approved else 'outlined' }}">{{ u.key }} · {{ u.status }} · v{{ u.version }}</span>
+</div>
+<p class="muted" style="margin-top:-8px">Status data as of {{ d_label(u.as_of) }} · {{ u.drafted_by }}, requested by {{ u.created_by }}{% if approved %} · approved by {{ u.approved_by }} {{ u.approved_at.strftime('%Y-%m-%d %H:%M') }} UTC{% endif %}</p>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if notice %}<div class="banner success"><span class="material-symbols-outlined">check_circle</span><div>{{ notice }}</div></div>{% endif %}
+{% if issues %}<div class="banner warning"><span class="material-symbols-outlined">fact_check</span>
+  <div><strong>{{ issues | length }} sentence{{ '' if issues | length == 1 else 's' }} flagged.</strong> Each must cite data, use only numbers in the facts it cites, and leave status to the rules. Fix or remove them to approve.</div></div>
+{% elif not approved %}<div class="banner info"><span class="material-symbols-outlined">verified</span><div>Every sentence cites existing facts and uses only numbers found in them.</div></div>{% endif %}
+
+<div class="grid-even">
+  <div>
+    <form method="post" action="/updates/{{ u.id }}/edit" class="card">
+      <div class="card-header"><h3>{{ 'Text' if approved else 'Review and edit' }}</h3><span class="muted" style="margin-left:auto;font-size:12px">Hover a citation to see the fact.</span></div>
+      <div class="card-body update-editor">
+      {% for prefix, heading, sentences in sections %}
+        {% set pkey = prefix.split('.')[1] if prefix.startswith('products.') else '' %}
+        <div class="update-section">
+          <div class="overline">
+            {% if pkey %}{% set p = products.get(pkey) %}{% if p %}<span class="rag rag-{{ p.overall }}"></span> {{ p.name }}{% else %}{{ pkey }}{% endif %}{% else %}{{ heading }}{% endif %}
+          </div>
+          {% if issues.get(prefix) %}<div class="issue">{{ issues[prefix] | join(' ') }}</div>{% endif %}
+          {% for s in sentences %}{% set name = prefix ~ '.' ~ loop.index0 %}
+          <div class="sentence {{ 'flagged' if issues.get(name) }}">
+            {% if approved %}<div>{{ s.text }}</div>
+            {% else %}<textarea name="text:{{ name }}" rows="2" aria-label="Sentence">{{ s.text }}</textarea>{% endif %}
+            <div class="sentence-meta">{{ cites(s) }}
+              {% if not approved %}<label class="drop"><input type="checkbox" name="drop:{{ name }}"> remove</label>{% endif %}</div>
+            {% for issue in issues.get(name, []) %}<div class="issue">{{ issue }}</div>{% endfor %}
+          </div>
+          {% else %}<div class="muted" style="font-size:13px">None.</div>{% endfor %}
+        </div>
+      {% endfor %}
+      </div>
+      {% if not approved %}
+      <div class="card-body actions" style="justify-content:flex-start;margin:0;border-top:1px solid var(--divider)">
+        <input name="reason" placeholder="Why the change (kept with the version)" aria-label="Reason" style="flex:1;min-width:200px">
+        <button class="button outlined" type="submit">Save as version {{ u.version + 1 }}</button>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+
+  <div>
+    {% if not approved %}
+    <div class="card">
+      <div class="card-header"><h3>Approve</h3></div>
+      <form method="post" action="/updates/{{ u.id }}/approve" class="card-body">
+        <p style="margin-top:0;font-size:13px">Approving freezes version {{ u.version }}. Only an approved update can be delivered.</p>
+        <button class="button contained" type="submit" {{ 'disabled' if issues }}><span class="material-symbols-outlined">task_alt</span>Approve version {{ u.version }}</button>
+      </form>
+    </div>
+    {% else %}
+    <div class="card">
+      <div class="card-header"><h3>Deliver</h3><span class="chip {{ 'warning' if delivery.live else 'outlined' }}" style="margin-left:auto">{{ 'Live' if delivery.live else 'Simulated' }}</span></div>
+      <div class="card-body deliver">
+        {% if not delivery.live %}<p class="muted" style="margin-top:0;font-size:12px">Demo mode: the exact message is recorded and shown, and nothing is sent. Set LP_DELIVERY_MODE=live and a channel's settings to send.</p>{% endif %}
+        <form method="post" action="/updates/{{ u.id }}/deliver/outlook">
+          <button class="button outlined" type="submit" {{ 'disabled' if delivery.live and not delivery.configured('outlook') }}><span class="material-symbols-outlined">mail</span>Outlook email</button>
+          <span class="muted" style="font-size:12px">{{ recipients['summary'] | length }} summary, {{ recipients['detailed'] | length }} detailed{% if delivery.live %} · {{ 'saved as drafts' if delivery.outlook_mode != 'send' else 'sent' }}{% endif %}</span>
+        </form>
+        {% for ch in ['teams', 'slack'] %}
+        <form method="post" action="/updates/{{ u.id }}/deliver/{{ ch }}">
+          <button class="button outlined" type="submit" {{ 'disabled' if delivery.live and not delivery.configured(ch) }}><span class="material-symbols-outlined">{{ 'groups' if ch == 'teams' else 'tag' }}</span>{{ channels[ch] }}</button>
+          <select name="audience" aria-label="Version">{% for k, label in audiences.items() %}<option value="{{ k }}">{{ label.split(' (')[0] }}</option>{% endfor %}</select>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <div class="card-header"><h3>Preview</h3>
+        <span style="margin-left:auto">{% for k, label in audiences.items() %}<a class="chip {{ 'primary' if k == audience else 'outlined' }}" href="/updates/{{ u.id }}?audience={{ k }}#preview">{{ label.split(' (')[0] }}</a> {% endfor %}</span></div>
+      <div class="card-body email-preview" id="preview">
+        <div class="overline">Subject</div><div style="margin-bottom:8px">{{ preview.subject }}</div>
+        {{ preview.html | safe }}
+      </div>
+    </div>
+
+    {% if deliveries %}
+    <div class="card">
+      <div class="card-header"><h3>Deliveries</h3></div>
+      <ul class="list">
+        {% for x in deliveries %}
+        <li class="list-item">
+          <div class="text">
+            <a class="primary" href="/updates/{{ u.id }}?show={{ x.id }}#delivery">{{ channels[x.channel] }} · {{ x.audience }} · v{{ x.version }}</a>
+            <div class="secondary">{{ x.status }} · {{ x.target }} · {{ x.actor }} · {{ x.at.strftime('%Y-%m-%d %H:%M') }} UTC{% if x.message_id %} · id {{ x.message_id[:24] }}{% endif %}</div>
+            {% if x.detail %}<div class="secondary">{{ x.detail }}</div>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if shown %}<div class="card-body" id="delivery"><div class="overline">Payload sent{{ ' (simulated)' if shown.mode == 'simulated' }}: {{ channels[shown.channel] }}</div><pre class="payload">{{ shown.payload }}</pre></div>{% endif %}
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <div class="card-header"><h3>Versions</h3></div>
+      <ul class="list">{% for v in versions %}<li class="list-item"><div class="text"><div class="primary">Version {{ v.version }}</div><div class="secondary">{{ v.actor }} · {{ v.at.strftime('%Y-%m-%d %H:%M') }} UTC · {{ v.reason }}</div></div></li>{% endfor %}</ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

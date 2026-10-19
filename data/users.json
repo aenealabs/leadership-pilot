@@ -1,0 +1,29 @@
+{
+  "_note": "Fictional demo users for the 'acting as' switcher. Approvers own the listening tour: only they can open interview notes. Real sign-in (LP_AUTH=oidc) replaces this.",
+  "users": [
+    {
+      "id": "po",
+      "name": "Jordan Lee",
+      "role": "Senior Manager, IT Product Ownership",
+      "approver": true
+    },
+    {
+      "id": "ba",
+      "name": "Sam Patel",
+      "role": "Business Analyst",
+      "approver": false
+    },
+    {
+      "id": "eng",
+      "name": "Morgan Chen",
+      "role": "Engineering Lead",
+      "approver": true
+    },
+    {
+      "id": "stake",
+      "name": "Riley Adams",
+      "role": "Director of Engineering",
+      "approver": false
+    }
+  ]
+}

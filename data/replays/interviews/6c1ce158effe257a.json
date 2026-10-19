@@ -1,0 +1,94 @@
+{
+  "notes": "Listening tour, week 2. Marcus Bell, Chief Engineer, Aerospace Systems. 30 minutes, Teams.\n\nMarcus framed everything around compliance. Aerospace drawings include ITAR and EAR controlled data, and \"every time we share with a supplier, someone in my team is doing a manual license check against a spreadsheet.\" Twice this year a drawing went to a supplier before the license check finished; both were caught, but \"that is a reportable event waiting to happen.\"\n\nSuppliers are the second theme. \"Suppliers find out about our drawing changes when the parts don't fit.\" Marcus wants automatic change notices to suppliers, with acknowledgement, but only for what each supplier is licensed to see.\n\nOn PLM itself Marcus is positive: the 3DEXPERIENCE migration two years ago \"was painful but the right call.\" Concerned that any new tooling adds another place to look. \"Don't give my engineers a fifth system. Put it where they already work.\"\n\nAsked about prioritization, Marcus wants a voice: aerospace changes are lower volume but higher consequence, and \"a pure volume ranking will always bury us.\"\n\nSuccess: zero premature shares of controlled data, and supplier acknowledgement of every change within five days.\n\nFollow-up: get the two premature-share incident reports from Trade Compliance.",
+  "extraction": {
+    "summary": "Marcus Bell, Chief Engineer for Aerospace Systems, frames their needs around export compliance (ITAR/EAR) when sharing controlled drawings with suppliers, and around suppliers learning of drawing changes too late. They support the 3DEXPERIENCE PLM platform but do not want another separate tool, and they want aerospace's low-volume, high-consequence changes to get fair weight in prioritization.",
+    "pain_points": [
+      {
+        "title": "Manual export license checks before supplier sharing",
+        "description": "Sharing ITAR/EAR-controlled drawings with suppliers depends on a manual license check against a spreadsheet. Twice this year a drawing went to a supplier before the check finished. Both were caught, but each was a near-miss on a reportable compliance event.",
+        "severity": "critical",
+        "systems": [
+          "spreadsheet"
+        ],
+        "quotes": [
+          "Aerospace drawings include ITAR and EAR controlled data, and \"every time we share with a supplier, someone in my team is doing a manual license check against a spreadsheet.\"",
+          "Twice this year a drawing went to a supplier before the license check finished; both were caught, but \"that is a reportable event waiting to happen.\""
+        ]
+      },
+      {
+        "title": "Suppliers not notified of drawing changes",
+        "description": "Suppliers do not get timely notice of drawing changes and only find out when parts fail to fit. This causes fit problems and rework.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "\"Suppliers find out about our drawing changes when the parts don't fit.\""
+        ]
+      },
+      {
+        "title": "Tool sprawl for engineers",
+        "description": "Marcus is concerned that any new tooling adds another place for engineers to look. They want new capability built into the systems engineers already use.",
+        "severity": "medium",
+        "systems": [
+          "3DEXPERIENCE"
+        ],
+        "quotes": [
+          "Concerned that any new tooling adds another place to look.",
+          "\"Don't give my engineers a fifth system. Put it where they already work.\""
+        ]
+      },
+      {
+        "title": "Volume-based prioritization buries aerospace",
+        "description": "Aerospace changes are lower volume but higher consequence. A prioritization model based purely on volume would always push aerospace needs down.",
+        "severity": "medium",
+        "systems": [],
+        "quotes": [
+          "aerospace changes are lower volume but higher consequence, and \"a pure volume ranking will always bury us.\""
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "No controlled (ITAR/EAR) data is shared with a supplier before the license check is complete.",
+        "measure": "Zero premature shares of controlled data",
+        "quotes": [
+          "Success: zero premature shares of controlled data, and supplier acknowledgement of every change within five days."
+        ]
+      },
+      {
+        "description": "Suppliers receive automatic drawing change notices and must acknowledge them. Each supplier sees only what they are licensed to see.",
+        "measure": "Supplier acknowledgement of every change within five days",
+        "quotes": [
+          "Marcus wants automatic change notices to suppliers, with acknowledgement, but only for what each supplier is licensed to see.",
+          "Success: zero premature shares of controlled data, and supplier acknowledgement of every change within five days."
+        ]
+      },
+      {
+        "description": "New capabilities are delivered inside the tools engineers already use, not as another separate system.",
+        "measure": "",
+        "quotes": [
+          "\"Don't give my engineers a fifth system. Put it where they already work.\""
+        ]
+      },
+      {
+        "description": "Aerospace has a voice in prioritization, and changes are weighted by consequence, not just volume.",
+        "measure": "",
+        "quotes": [
+          "Asked about prioritization, Marcus wants a voice: aerospace changes are lower volume but higher consequence, and \"a pure volume ranking will always bury us.\""
+        ]
+      }
+    ],
+    "systems_named": [
+      "3DEXPERIENCE",
+      "spreadsheet (license check)"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "Can we get the two premature-share incident reports from Trade Compliance? What allowed the drawing to be shared before the license check finished?",
+      "Which four systems do engineers currently use? Which one is 'where they already work' for supplier sharing and change notices?",
+      "How are drawings shared with suppliers today (portal, email, PLM)? Who owns and maintains the license spreadsheet?",
+      "Which supplier collaboration channel should carry change notices and acknowledgements? How should license entitlements per supplier be sourced?",
+      "What does a fair prioritization approach look like to Marcus (for example, consequence or risk weighting)? How would they like aerospace to be represented in prioritization decisions?",
+      "Roughly how often do supplier fit issues from unnotified changes happen, and what do they cost in rework or schedule?"
+    ]
+  }
+}

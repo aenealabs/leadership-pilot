@@ -1,0 +1,120 @@
+{
+  "notes": "Listening tour, week 4. Tomas Rivera, Export Compliance Manager, Trade Compliance. 30 minutes.\n\nTomas confirmed the two premature-share incidents Marcus mentioned. Neither became a violation, \"but we were lucky, not controlled.\" The root cause in both: drawings in PLM had no export classification, so nothing stopped them from being shared.\n\n\"Classification is optional in PLM today. It should be impossible to release a controlled item without it.\" Tomas estimates thousands of legacy items from the acquisitions have no classification at all.\n\nTomas wants access to controlled data driven by classification and by each person's authorization, not by folder permissions someone set up years ago. Quarterly access attestations are done by hand in spreadsheets and take two weeks.\n\nOn suppliers: Trade Compliance owns the export licenses, but supplier license data lives with Procurement, \"and the two are never in sync.\" This answers Daniel's open question only partly; nobody owns keeping them aligned.\n\nTomas is wary of AI tools touching controlled technical data. \"Whatever you build, I need to know where the data goes and who can see it.\"\n\nSuccess: no controlled item released without classification, and access attestation in days, not weeks.\n\nFollow-up: share the classification backlog count by business unit.",
+  "extraction": {
+    "summary": "Tomas Rivera, Export Compliance Manager in Trade Compliance, is focused on export control risk in engineering data: unclassified drawings in PLM led to two premature-share incidents that were 'lucky, not controlled.' Their priorities are mandatory classification before release, classification- and authorization-driven access to controlled data, faster access attestations, and aligned supplier license data.",
+    "pain_points": [
+      {
+        "title": "Export classification is optional in PLM",
+        "description": "Drawings in PLM can exist and be released without export classification, so nothing prevents controlled data from being shared. This was the root cause of two premature-share incidents that narrowly avoided becoming violations.",
+        "severity": "critical",
+        "systems": [
+          "PLM"
+        ],
+        "quotes": [
+          "Neither became a violation, \"but we were lucky, not controlled.\"",
+          "The root cause in both: drawings in PLM had no export classification, so nothing stopped them from being shared.",
+          "\"Classification is optional in PLM today. It should be impossible to release a controlled item without it.\""
+        ]
+      },
+      {
+        "title": "Large unclassified legacy backlog from acquisitions",
+        "description": "Tomas estimates thousands of legacy items from acquisitions have no export classification at all, leaving potentially controlled data unprotected.",
+        "severity": "high",
+        "systems": [
+          "PLM"
+        ],
+        "quotes": [
+          "Tomas estimates thousands of legacy items from the acquisitions have no classification at all."
+        ]
+      },
+      {
+        "title": "Access to controlled data based on stale folder permissions",
+        "description": "Access to controlled data is governed by folder permissions set up years ago rather than by classification and each person's authorization, creating compliance risk.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "Tomas wants access to controlled data driven by classification and by each person's authorization, not by folder permissions someone set up years ago."
+        ]
+      },
+      {
+        "title": "Manual quarterly access attestations",
+        "description": "Quarterly access attestations are done by hand in spreadsheets and take two weeks, consuming effort and slowing compliance verification.",
+        "severity": "medium",
+        "systems": [
+          "spreadsheets"
+        ],
+        "quotes": [
+          "Quarterly access attestations are done by hand in spreadsheets and take two weeks."
+        ]
+      },
+      {
+        "title": "Export licenses and supplier license data out of sync",
+        "description": "Trade Compliance owns export licenses while supplier license data lives with Procurement; the two are never in sync and nobody owns keeping them aligned.",
+        "severity": "high",
+        "systems": [],
+        "quotes": [
+          "Trade Compliance owns the export licenses, but supplier license data lives with Procurement, \"and the two are never in sync.\"",
+          "nobody owns keeping them aligned."
+        ]
+      },
+      {
+        "title": "Concern about AI tools and controlled data",
+        "description": "Tomas is wary of AI tools handling controlled technical data and requires visibility into where data goes and who can see it.",
+        "severity": "medium",
+        "systems": [
+          "AI tools"
+        ],
+        "quotes": [
+          "Tomas is wary of AI tools touching controlled technical data.",
+          "\"Whatever you build, I need to know where the data goes and who can see it.\""
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "No controlled item can be released in PLM without export classification.",
+        "measure": "Zero controlled items released without classification.",
+        "quotes": [
+          "\"Classification is optional in PLM today. It should be impossible to release a controlled item without it.\"",
+          "Success: no controlled item released without classification, and access attestation in days, not weeks."
+        ]
+      },
+      {
+        "description": "Access to controlled data is driven by classification and individual authorization rather than legacy folder permissions.",
+        "measure": "",
+        "quotes": [
+          "Tomas wants access to controlled data driven by classification and by each person's authorization, not by folder permissions someone set up years ago."
+        ]
+      },
+      {
+        "description": "Access attestations completed much faster than the current manual two-week process.",
+        "measure": "Access attestation in days, not weeks.",
+        "quotes": [
+          "Success: no controlled item released without classification, and access attestation in days, not weeks."
+        ]
+      },
+      {
+        "description": "Transparency into data flows and visibility for any new tooling, especially AI, touching controlled technical data.",
+        "measure": "",
+        "quotes": [
+          "\"Whatever you build, I need to know where the data goes and who can see it.\""
+        ]
+      }
+    ],
+    "systems_named": [
+      "PLM",
+      "spreadsheets",
+      "AI tools"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "Can you share the classification backlog count by business unit? (Agreed follow-up.)",
+      "Which acquisitions contribute most of the unclassified legacy items, and are they in PLM or still in legacy systems?",
+      "Which system does Procurement use for supplier license data, and where are export licenses maintained in Trade Compliance?",
+      "Who should own keeping export licenses and supplier license data aligned, and what would 'in sync' look like?",
+      "What systems hold the folder permissions governing controlled data today (PLM, CAD vault, file shares)?",
+      "What were the channels in the two premature-share incidents (e.g., supplier portal, email), and were they supplier-facing?",
+      "What specific controls or assurances would make AI tools acceptable for controlled technical data?"
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% macro cite(lcs, bad=[]) %}
+{% for lc in lcs %}<span class="chip outlined cite-chip" title="{{ lc.stakeholder.name }}, {{ lc.stakeholder.role }}: {{ lc.concern.title }}">{{ lc.label }} · {{ lc.stakeholder.name }}</span>{% endfor %}
+{% for x in bad %}<span class="chip trace-unverified" title="The model cited a label that is not in the accepted record">{{ x }} · not found</span>{% endfor %}
+{% endmacro %}
+{% block content %}
+<div class="page-header">
+  <h1>Synthesis</h1>
+  <span class="muted">{{ items | length | plural('accepted pain point') }} from {{ counts.accepted }} reviewed interviews.</span>
+  <form method="post" action="/synthesis/run" style="margin-left:auto">
+    <button class="button contained" type="submit"><span class="material-symbols-outlined">auto_awesome</span>{{ 'Re-run synthesis' if run else 'Synthesize' }}</button>
+  </form>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if notice %}<div class="banner success"><span class="material-symbols-outlined">check_circle</span><div>{{ notice }}</div></div>{% endif %}
+
+{% if not run %}
+<div class="card"><div class="empty">
+  <span class="material-symbols-outlined">hub</span>
+  <h3>No synthesis yet</h3>
+  <p>Accept at least two interviews, then synthesize. The AI groups pain points into themes and spots contradictions; the ranking itself is computed from who raised what.</p>
+  <p class="muted">Offline demo: on Interviews, use <strong>Extract all</strong> then <strong>Accept all extracted</strong> to load the recorded demo set.</p>
+</div></div>
+{% else %}
+
+{% if stale %}<div class="banner warning"><span class="material-symbols-outlined">update</span>
+  <div>The accepted pain points changed since this synthesis was drafted. Re-run it to include them.</div></div>{% endif %}
+
+<div class="banner info"><span class="material-symbols-outlined">campaign</span>
+  <div><strong>{{ syn.headline }}</strong><br><span class="muted">{{ run.drafted_by }} · {{ run.created_at.strftime('%Y-%m-%d %H:%M') }} UTC · requested by {{ run.created_by }}</span></div></div>
+
+<div class="card" id="ranking">
+  <div class="card-header"><h3>Ranked problems</h3>
+    <span class="muted" style="margin-left:auto;font-size:12px">Score = weighted breadth (share of stakeholders), severity, influence, and strategic fit, 0-100.</span></div>
+  <form method="post" action="/synthesis/weights" class="weights">
+    <span class="overline">Weights</span>
+    {% for k, label in [('breadth', 'Breadth'), ('severity', 'Severity'), ('influence', 'Influence'), ('fit', 'Strategic fit')] %}
+    <label>{{ label }} <select name="{{ k }}">{% for n in range(0, 6) %}<option {{ 'selected' if weights[k] == n }}>{{ n }}</option>{% endfor %}</select></label>
+    {% endfor %}
+    <button class="button text" type="submit">Apply</button>
+    <span class="muted" style="font-size:12px">set by {{ weights_set_by }}</span>
+  </form>
+  <table class="problems">
+    <thead><tr><th>#</th><th>Problem</th><th>Who</th><th>Severity</th><th>Fit</th><th>Score</th><th>Backlog Pilot</th></tr></thead>
+    <tbody>
+    {% for p in problems %}{% set ref = 'PR-' ~ run.id ~ '.' ~ (p.index + 1) %}{% set sent = handoffs.get(('problem', p.index)) %}
+      <tr id="{{ ref }}">
+        <td class="rank">{{ loop.index }}</td>
+        <td>
+          <div class="primary">{{ p.theme.title }} <span class="mono muted">{{ ref }}</span></div>
+          <div class="muted" style="font-size:13px">{{ p.theme.description }}</div>
+          <details><summary>{{ p.concerns | length | plural('pain point') }}</summary>
+            <ul class="tight">{% for lc in p.concerns %}<li><span class="mono">{{ lc.label }}</span> {{ lc.concern.title }} <span class="muted">· {{ lc.stakeholder.name }}, {{ lc.stakeholder.business_unit }}</span></li>{% endfor %}</ul>
+            {% if p.unknown_ids %}<div>{{ cite([], p.unknown_ids) }}</div>{% endif %}
+          </details>
+        </td>
+        <td><strong>{{ p.breadth }}</strong> <span class="muted">({{ p.business_units | join(', ') }})</span><br><span class="muted" style="font-size:12px">max influence: {{ p.influence }}</span></td>
+        <td><span class="chip sev-{{ p.max_severity }}">{{ p.max_severity }}</span></td>
+        <td>
+          <form method="post" action="/synthesis/{{ run.id }}/fit/{{ p.index }}" class="fit-form" title="{{ p.theme.fit_rationale }}">
+            <select name="fit" aria-label="Strategic fit">{% for n in range(1, 6) %}<option {{ 'selected' if p.fit == n }}>{{ n }}</option>{% endfor %}</select>
+            <input type="text" name="reason" placeholder="Why?" aria-label="Why change the strategic fit" size="8">
+            <button class="icon-button" type="submit" title="Set strategic fit" aria-label="Set strategic fit"><span class="material-symbols-outlined">check</span></button>
+          </form>
+          <div class="muted" style="font-size:11px">{{ 'AI suggestion' if p.fit_set_by == 'AI suggestion' else 'set by ' ~ p.fit_set_by }}</div>
+        </td>
+        <td><span class="chip primary" title="breadth {{ '%.2f' % p.score_parts.breadth }}, severity {{ '%.2f' % p.score_parts.severity }}, influence {{ '%.2f' % p.score_parts.influence }}, fit {{ '%.2f' % p.score_parts.fit }}">{{ p.score }}</span></td>
+        <td>
+          {% if sent %}{% set st = handoff_status.get(('problem', p.index)) %}
+            {% if st and st.intake_key %}<a class="chip trace-traced" href="{{ backlog_url }}{{ st.intake_path }}" target="_blank" rel="noopener">{{ st.intake_key }}</a>
+            {% else %}<span class="chip outlined">In inbox{{ ' · ' ~ st.status if st and st.status != 'new' }}</span>{% endif %}
+          {% elif suite_connected %}
+          <form method="post" action="/synthesis/{{ run.id }}/problems/{{ p.index }}/send">
+            <button class="button text" type="submit"><span class="material-symbols-outlined">send</span>Send</button></form>
+          {% else %}<span class="muted" style="font-size:12px">Not connected</span>{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if contradictions %}
+<div class="card">
+  <div class="card-header"><h3>Where people disagree</h3></div>
+  <div class="card-body">
+  {% for c, a_ok, a_bad, b_ok, b_bad in contradictions %}
+    <div class="contradiction">
+      <div class="overline">{{ c.topic }}</div>
+      <div class="sides">
+        <div class="side"><div>{{ c.side_a }}</div>{{ cite(a_ok, a_bad) }}</div>
+        <div class="vs">vs.</div>
+        <div class="side"><div>{{ c.side_b }}</div>{{ cite(b_ok, b_bad) }}</div>
+      </div>
+      <div class="muted" style="font-size:13px"><span class="material-symbols-outlined" style="font-size:16px">lightbulb</span> {{ c.why_it_matters }}</div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Personas</h3><span class="muted" style="margin-left:auto;font-size:12px">Proposals wait for approval in Backlog Pilot.</span></div>
+    <ul class="list">
+      {% for pd, grounded in personas %}{% set sent = handoffs.get(('persona', loop.index0)) %}
+      <li class="list-item" style="align-items:flex-start">
+        <span class="avatar"><span class="material-symbols-outlined">person</span></span>
+        <div class="text">
+          <div class="primary">{{ pd.name }}</div>
+          <div class="secondary">{{ pd.description }}</div>
+          <div class="secondary"><strong>Goals:</strong> {{ pd.goals | join('; ') }}</div>
+          <div class="secondary"><strong>Pain points:</strong> {{ pd.pain_points | join('; ') }}</div>
+          <div style="margin-top:4px">{{ cite(grounded) }}</div>
+        </div>
+        {% if sent %}<span class="chip outlined">Proposed</span>
+        {% elif suite_connected %}<form method="post" action="/synthesis/{{ run.id }}/personas/{{ loop.index0 }}/propose">
+          <button class="button text" type="submit">Propose</button></form>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>30-60-90 day plan</h3></div>
+    <div class="card-body plan">
+      {% for horizon in ['30', '60', '90'] %}
+      <div class="overline">First {{ horizon }} days</div>
+      <ul class="tight">{% for a in syn.plan if a.horizon == horizon %}<li>{{ a.action }}{% if a.theme_titles %} <span class="muted">({{ a.theme_titles | join('; ') }})</span>{% endif %}</li>{% endfor %}</ul>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% for j in syn.journeys %}
+<div class="card">
+  <div class="card-header"><h3>Journey: {{ j.title }}</h3><span class="chip outlined">{{ j.persona }}</span></div>
+  <div class="journey">
+    {% for st in j.steps %}
+    <div class="step">
+      <div class="step-no">{{ loop.index }}</div>
+      <div class="primary">{{ st.step }}</div>
+      <div class="muted" style="font-size:13px">{{ st.what_happens }}</div>
+      {% for x in st.pain_ids if x in labels %}<span class="chip outlined pain-tag" title="{{ labels[x].concern.title }}">{{ x }}</span>{% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+
+<div class="card" id="readout">
+  <div class="card-header"><h3>Readout</h3><span class="muted" style="margin-left:auto;font-size:12px">Quotes in the readout are not attributed by name.</span></div>
+  <div class="card-body">
+    <div class="actions" style="justify-content:flex-start;margin-top:0">
+      <a class="button outlined" href="/synthesis/readout.docx"><span class="material-symbols-outlined">description</span>Word</a>
+      <a class="button outlined" href="/synthesis/readout.md"><span class="material-symbols-outlined">markdown</span>Markdown</a>
+      <button class="button outlined" type="button" onclick="navigator.clipboard.writeText(document.getElementById('outline').value); this.textContent='Copied'">
+        <span class="material-symbols-outlined">content_copy</span>Copy slide outline</button>
+    </div>
+    <p class="muted" style="font-size:13px">To make slides: in PowerPoint choose View → Outline, click into the first slide, and paste. Unindented lines become slide titles and indented lines become bullets; lines starting "Notes:" are the supporting quotes for your speaker notes.</p>
+    <textarea id="outline" rows="10" readonly class="mono">{{ outline }}</textarea>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>RAID log</h1>
+  <span class="muted">Risks, assumptions, issues, and dependencies. Status rules read the open items.</span>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% set names = dict(products) %}
+<div class="grid-2">
+  <div class="card">
+    <table class="raid">
+      <thead><tr><th>Item</th><th>Product</th><th>Impact</th><th>Owner</th><th>Due</th><th></th></tr></thead>
+      <tbody>
+      {% for i in items %}
+        <tr class="{{ 'closed' if i.status == 'closed' }}">
+          <td><div class="primary">{{ i.title }}</div>
+            <div class="muted" style="font-size:12px"><span class="mono">{{ i.key }}</span> · {{ i.kind }}{% if i.kind == 'risk' %}, probability {{ i.probability }}{% endif %}{% if i.kind == 'dependency' %}, {{ 'confirmed' if i.confirmed else 'not confirmed' }}{% endif %}{% if i.status == 'closed' %} · closed{% endif %}</div>
+            {% if i.mitigation %}<div class="muted" style="font-size:12px">{{ i.mitigation }}</div>{% endif %}</td>
+          <td>{{ names.get(i.product, i.product) }}</td>
+          <td><span class="chip sev-{{ i.impact }}">{{ i.impact }}</span></td>
+          <td>{{ i.owner or '' }}{% if not i.owner %}<span class="chip trace-unverified">no owner</span>{% endif %}</td>
+          <td>{{ d_label(i.due) if i.due else '' }}</td>
+          <td style="white-space:nowrap">{% if i.status == 'open' %}<a class="button text" href="/raid?edit={{ i.id }}#editor">Edit</a>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card" id="editor">
+    {% set v = form or {} %}
+    <div class="card-header"><h3>{{ 'Edit ' ~ edit.key if edit else 'Add an item' }}</h3>{% if edit %}<a class="button text" style="margin-left:auto" href="/raid">New item</a>{% endif %}</div>
+    <form method="post" action="/raid" class="card-body form-grid">
+      {% if edit %}<input type="hidden" name="id" value="{{ edit.id }}">{% endif %}
+      <label>Type <select name="kind">{% for k in kinds %}<option {{ 'selected' if (v.kind or (edit.kind if edit)) == k }}>{{ k }}</option>{% endfor %}</select></label>
+      <label>Product <select name="product">{% for key, name in products %}<option value="{{ key }}" {{ 'selected' if (v.product or (edit.product if edit)) == key }}>{{ name }}</option>{% endfor %}</select></label>
+      <label class="wide">Title <input name="title" required value="{{ v.title or (edit.title if edit else '') }}"></label>
+      <label class="wide">Description <textarea name="description" rows="2">{{ v.description or (edit.description if edit else '') }}</textarea></label>
+      <label>Impact <select name="impact">{% for l in levels %}<option {{ 'selected' if (v.impact or (edit.impact if edit else 'medium')) == l }}>{{ l }}</option>{% endfor %}</select></label>
+      <label>Probability (risks) <select name="probability"><option value=""></option>{% for l in levels %}<option {{ 'selected' if (v.probability or (edit.probability if edit else '')) == l }}>{{ l }}</option>{% endfor %}</select></label>
+      <label>Owner <input name="owner" value="{{ v.owner or (edit.owner if edit else '') }}"></label>
+      <label>Due <input type="date" name="due" value="{{ v.due or (edit.due.isoformat() if edit and edit.due else '') }}"></label>
+      <label class="wide check"><input type="checkbox" name="confirmed" {{ 'checked' if v.confirmed or (edit and edit.confirmed) }}> Dependency confirmed</label>
+      <label class="wide">Mitigation or next step <textarea name="mitigation" rows="2">{{ v.mitigation or (edit.mitigation if edit else '') }}</textarea></label>
+      <div class="wide actions" style="justify-content:flex-start;margin:0"><button class="button contained" type="submit">{{ 'Save changes' if edit else 'Add item' }}</button></div>
+    </form>
+    {% if edit %}
+    <form method="post" action="/raid/{{ edit.id }}/close" class="card-body" style="border-top:1px solid var(--divider)">
+      <label>Close with a reason <input name="reason" placeholder="e.g. mitigated: SSO shipped"></label>
+      <button class="button outlined" type="submit">Close item</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

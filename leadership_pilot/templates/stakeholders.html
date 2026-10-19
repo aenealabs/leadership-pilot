@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% macro badge(sh) %}
+{% set ivs = status[sh.id] %}{% set st = ivs[-1].status if ivs else 'none' %}
+<a class="who" href="/stakeholders/{{ sh.id }}" title="{{ sh.role }}, {{ sh.business_unit }}">
+  <strong><span class="dot {{ st }}"></span>{{ sh.name }}</strong>
+  <span class="muted">{{ sh.role }}</span>
+</a>
+{% endmacro %}
+{% block content %}
+<div class="page-header">
+  <h1>Stakeholders</h1>
+  <span class="muted">The shared record behind the listening tour and the weekly update.</span>
+</div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+
+<div class="card">
+  <div class="stats" style="grid-template-columns: repeat(4, 1fr)">
+    <div class="stat"><div class="value">{{ counts.stakeholders }}</div><div class="label">Stakeholders</div></div>
+    <div class="stat"><div class="value">{{ counts.interviews }}</div><div class="label">Interviews</div></div>
+    <div class="stat"><div class="value">{{ counts.accepted }}</div><div class="label">Reviewed</div></div>
+    <div class="stat"><div class="value">{{ counts.pain_points }}</div><div class="label">Pain points accepted</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"><h3>Influence and interest</h3>
+    <span class="muted" style="margin-left:auto">Top right: manage closely. Top left: keep satisfied. Bottom right: keep informed.</span></div>
+  <div class="grid-map">
+    {% for infl in ['high', 'medium', 'low'] %}
+    <div class="axis">{{ infl | capitalize }}<br>influence</div>
+    {% for inter in ['low', 'medium', 'high'] %}
+    <div class="cell {{ 'key' if infl == 'high' and inter == 'high' }}">
+      {% for sh in people if sh.influence == infl and sh.interest == inter %}{{ badge(sh) }}{% endfor %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <div></div>
+    {% for inter in ['low', 'medium', 'high'] %}<div class="axis">{{ inter | capitalize }} interest</div>{% endfor %}
+  </div>
+  <div class="legend">
+    <span><span class="dot accepted"></span>Interview reviewed</span>
+    <span><span class="dot extracted"></span>Extracted, not yet reviewed</span>
+    <span><span class="dot notes"></span>Notes only / no interview</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"><h3>Everyone</h3></div>
+  <table>
+    <thead><tr><th>Key</th><th>Name</th><th>Role</th><th>Business unit</th><th>Products</th><th>Interviews</th></tr></thead>
+    <tbody>{% for sh in people %}
+      <tr><td class="mono muted">{{ sh.key }}</td><td><a href="/stakeholders/{{ sh.id }}">{{ sh.name }}</a></td>
+        <td>{{ sh.role }}</td><td>{{ sh.business_unit }}</td>
+        <td>{% for p in sh.product_list %}<span class="chip outlined" style="margin:0 4px 4px 0">{{ p }}</span>{% endfor %}</td>
+        <td>{{ status[sh.id] | length }}</td></tr>{% endfor %}</tbody>
+  </table>
+</div>
+
+<details class="card">
+  <summary class="card-header" style="cursor:pointer"><h3>Add a stakeholder</h3></summary>
+  <form method="post" action="/stakeholders" class="card-body persona-form">
+    <div class="grid-2" style="gap:12px">
+      <div class="field"><label>Name</label><input type="text" name="name" required></div>
+      <div class="field"><label>Role</label><input type="text" name="role" required></div>
+      <div class="field"><label>Business unit</label><input type="text" name="business_unit"></div>
+      <div class="field"><label>Products <span class="muted">(comma separated)</span></label><input type="text" name="products"></div>
+      <div class="field"><label>Influence</label><select name="influence">{% for l in levels %}<option {{ 'selected' if l == 'medium' }}>{{ l }}</option>{% endfor %}</select></div>
+      <div class="field"><label>Interest</label><select name="interest">{% for l in levels %}<option {{ 'selected' if l == 'medium' }}>{{ l }}</option>{% endfor %}</select></div>
+    </div>
+    <div class="actions"><button class="button contained" type="submit">Add stakeholder</button></div>
+  </form>
+</details>
+{% endblock %}

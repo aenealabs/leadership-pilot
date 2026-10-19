@@ -1,0 +1,102 @@
+{
+  "notes": "Listening tour, week 3. Elena Kovacs, Manufacturing Engineering Manager, Plant Operations. 40 minutes, on site.\n\nElena's world starts when engineering releases. \"The BOM shows up in SAP the next day if we're lucky, two days if the interface fails overnight.\" When it fails, nobody on Elena's team is told; they discover it when a work order pulls the old revision. Last quarter that caused a rework event on a switchgear line.\n\nElena wants same-day BOM availability and, more than speed, to be told when something fails. \"I can live with a delay if I know about it. Silent failures are what hurt.\"\n\nEffectivity is the other gap. Engineering releases changes with effectivity dates that don't match plant schedules, and \"we spend Mondays reconciling dates by email.\"\n\nOn ECOs: Elena is an approver on manufacturing-impacting changes and gets \"forty notification emails a day.\" Elena admits approving in batches on Fridays, which adds days to cycle time. Wants one prioritized queue.\n\nPositive: the PLM team responds quickly when called directly. \"Hannah's team is great. The process around them is the problem.\"\n\nSuccess: zero builds to an old revision, and Monday reconciliation gone.\n\nFollow-up: get the rework event cost from plant finance.",
+  "extraction": {
+    "summary": "Elena Kovacs is the Manufacturing Engineering Manager in Plant Operations, whose team's work begins once engineering releases changes. Their top concern is silent failures in the overnight PLM-to-SAP BOM interface, which have led to builds against old revisions and a rework event on a switchgear line. Effectivity date mismatches and ECO approval notification overload are additional drags on plant operations and change cycle time.",
+    "pain_points": [
+      {
+        "title": "Silent BOM interface failures",
+        "description": "When the overnight BOM interface to SAP fails, nobody on the plant team is notified; they discover it only when a work order pulls the old revision. Last quarter this caused a rework event on a switchgear line.",
+        "severity": "critical",
+        "systems": [
+          "SAP"
+        ],
+        "quotes": [
+          "When it fails, nobody on Elena's team is told; they discover it when a work order pulls the old revision.",
+          "Last quarter that caused a rework event on a switchgear line.",
+          "I can live with a delay if I know about it. Silent failures are what hurt."
+        ]
+      },
+      {
+        "title": "Slow BOM availability in SAP",
+        "description": "Released BOMs reach SAP the next day at best, or two days if the overnight interface fails, which delays the plant's ability to act on engineering releases.",
+        "severity": "medium",
+        "systems": [
+          "SAP"
+        ],
+        "quotes": [
+          "The BOM shows up in SAP the next day if we're lucky, two days if the interface fails overnight."
+        ]
+      },
+      {
+        "title": "Effectivity dates don't match plant schedules",
+        "description": "Engineering releases changes with effectivity dates that don't align with plant schedules, forcing weekly manual reconciliation by email.",
+        "severity": "medium",
+        "systems": [
+          "email"
+        ],
+        "quotes": [
+          "Engineering releases changes with effectivity dates that don't match plant schedules, and \"we spend Mondays reconciling dates by email.\""
+        ]
+      },
+      {
+        "title": "ECO notification overload slows approvals",
+        "description": "As an approver on manufacturing-impacting changes, Elena receives about forty notification emails a day and approves in Friday batches, which adds days to ECO cycle time.",
+        "severity": "medium",
+        "systems": [
+          "email"
+        ],
+        "quotes": [
+          "Elena is an approver on manufacturing-impacting changes and gets \"forty notification emails a day.\"",
+          "Elena admits approving in batches on Fridays, which adds days to cycle time."
+        ]
+      }
+    ],
+    "desired_outcomes": [
+      {
+        "description": "Be notified promptly when the BOM interface to SAP fails, so failures are never silent.",
+        "measure": "Zero builds to an old revision.",
+        "quotes": [
+          "more than speed, to be told when something fails",
+          "I can live with a delay if I know about it. Silent failures are what hurt.",
+          "Success: zero builds to an old revision, and Monday reconciliation gone."
+        ]
+      },
+      {
+        "description": "Same-day BOM availability in SAP after engineering release.",
+        "measure": "",
+        "quotes": [
+          "Elena wants same-day BOM availability"
+        ]
+      },
+      {
+        "description": "Eliminate manual Monday reconciliation of effectivity dates against plant schedules.",
+        "measure": "Monday reconciliation gone.",
+        "quotes": [
+          "Success: zero builds to an old revision, and Monday reconciliation gone."
+        ]
+      },
+      {
+        "description": "A single prioritized queue for ECO approvals instead of a flood of notification emails.",
+        "measure": "",
+        "quotes": [
+          "Wants one prioritized queue."
+        ]
+      }
+    ],
+    "systems_named": [
+      "SAP",
+      "PLM",
+      "email"
+    ],
+    "urgency": "high",
+    "follow_up_questions": [
+      "What was the cost of last quarter's switchgear rework event? (Per the notes, to be obtained from plant finance.)",
+      "How often does the overnight BOM interface fail, and who, if anyone, is currently alerted when it does?",
+      "Who should receive interface failure alerts, and through what channel?",
+      "How are effectivity dates currently set by engineering, and what plant schedule information would be needed to align them?",
+      "Of the forty daily ECO notification emails, how many actually require Elena's action versus being informational?",
+      "What would make an ECO approval queue 'prioritized' from the plant's perspective: build date, line impact, or something else?",
+      "Beyond calling Hannah's team directly, which parts of the surrounding process cause the most friction?"
+    ]
+  }
+}
